@@ -1,26 +1,22 @@
 import { Link } from 'react-router-dom';
-import { TrendingUp, Rocket, Briefcase, Award, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Reveal from '@/components/Reveal';
 
 export default function Outcomes() {
   const cards = [
     {
-      icon: Rocket,
       title: 'Startup Founder / Co-Founder',
       desc: 'Build and launch your own venture with institutional support.',
     },
     {
-      icon: Briefcase,
       title: 'Product Manager',
       desc: 'Lead product strategy and execution at startups and growth companies.',
     },
     {
-      icon: TrendingUp,
       title: 'Venture Analyst',
       desc: 'Evaluate and support investments at venture capital firms.',
     },
     {
-      icon: Award,
       title: 'Innovation Consultant',
       desc: 'Help organizations build innovation capabilities and new ventures.',
     },
@@ -35,10 +31,8 @@ export default function Outcomes() {
               <p className="text-sm font-bold uppercase tracking-wider text-electric-500 mb-4">
                 Outcomes
               </p>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink-900 tracking-tight">
+              <h2 className="font-display text-4xl font-extrabold text-ink-900 tracking-tight sm:text-5xl">
                 What you'll become.
-                <br />
-                <span className="text-gradient-dark">Not just what you'll learn.</span>
               </h2>
             </div>
             <Link
@@ -51,17 +45,15 @@ export default function Outcomes() {
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 gap-0 md:grid-cols-2 lg:grid-cols-4">
           {cards.map((card, i) => (
             <Reveal key={i} delay={i * 100}>
-              <div className="group h-full p-8 rounded-3xl bg-ink-50 hover:bg-ink-900 transition-all duration-500">
-                <div className="w-12 h-12 rounded-xl bg-white group-hover:bg-electric-500 flex items-center justify-center mb-6 transition-all duration-300">
-                  <card.icon className="w-6 h-6 text-ink-700 group-hover:text-white transition-colors" />
-                </div>
-                <h3 className="font-display text-lg font-bold text-ink-900 group-hover:text-white transition-colors mb-3">
+              <div className="editorial-rule h-full p-6 pl-0 pr-8">
+                <span className="font-display text-4xl font-bold text-ink-200">0{i + 1}</span>
+                <h3 className="mt-6 font-display text-lg font-bold text-ink-900 mb-3">
                   {card.title}
                 </h3>
-                <p className="text-sm text-ink-500 group-hover:text-ink-300 transition-colors leading-relaxed">
+                <p className="text-sm text-ink-500 leading-relaxed">
                   {card.desc}
                 </p>
               </div>
@@ -71,16 +63,16 @@ export default function Outcomes() {
 
         <Reveal delay={400}>
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <div className="p-8 rounded-3xl bg-gradient-to-br from-electric-500 to-electric-600 text-white">
+            <div className="border-t-2 border-electric-500 py-6 pr-8">
               <h3 className="font-display text-xl font-bold mb-2">PPO Commitment</h3>
-              <p className="text-sm text-blue-100 leading-relaxed">
+              <p className="text-sm text-ink-500 leading-relaxed">
                 IIEI is committed to pre-placement opportunities for students. The career ecosystem
                 is designed around practical experience and industry exposure.
               </p>
             </div>
-            <div className="p-8 rounded-3xl bg-gradient-to-br from-ink-800 to-ink-950 text-white">
+            <div className="border-t-2 border-ink-900 py-6 pr-8">
               <h3 className="font-display text-xl font-bold mb-2">Institutional Funding</h3>
-              <p className="text-sm text-ink-300 leading-relaxed">
+              <p className="text-sm text-ink-500 leading-relaxed">
                 IIEI provides an institutional commitment towards supporting promising student
                 ventures through its entrepreneurship and funding ecosystem.
               </p>

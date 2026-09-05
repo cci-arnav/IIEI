@@ -13,14 +13,13 @@ interface ButtonLinkProps {
 
 const variantClasses: Record<string, string> = {
   primary:
-    'bg-electric-500 text-white hover:bg-electric-600 shadow-lg shadow-electric-500/25 hover:shadow-electric-500/40',
+    'cta-shine bg-ink-900 text-white hover:bg-ink-800 shadow-lg shadow-ink-900/15',
   secondary:
-    'bg-ink-900 text-white hover:bg-ink-800 shadow-lg shadow-ink-900/20',
+    'bg-ink-900 text-white hover:bg-ink-800',
   outline:
-    'border-2 border-ink-200 text-ink-900 hover:border-ink-900 hover:bg-ink-50',
+    'border border-ink-300 text-ink-900 hover:border-ink-900 hover:bg-ink-50',
   ghost: 'text-ink-700 hover:bg-ink-100 hover:text-ink-900',
-  light:
-    'bg-white/10 text-white border border-white/20 hover:bg-white/20 backdrop-blur-md',
+  light: 'text-white border border-white/30 hover:bg-white/10',
 };
 
 const sizeClasses: Record<string, string> = {
@@ -41,7 +40,7 @@ export default function ButtonLink({
   return (
     <Link
       to={to}
-      className={`inline-flex items-center justify-center gap-2 font-semibold rounded-full transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 font-semibold rounded-full transition-all duration-300 active:scale-[0.98] ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
     >
       {Icon && iconPosition === 'left' && <Icon className="w-4 h-4" />}
       {children}

@@ -78,9 +78,7 @@ export default function VirtualAssistant() {
       {/* Toggle button */}
       <button
         onClick={() => setOpen(!open)}
-        className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-electric-500 to-cyan-500 shadow-2xl shadow-electric-500/30 flex items-center justify-center transition-all duration-300 hover:scale-110 ${
-          open ? 'rotate-90' : ''
-        }`}
+        className={`fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-ink-900 text-white shadow-xl shadow-ink-900/20 transition-all duration-300 hover:bg-electric-600 ${open ? 'rotate-90' : ''}`}
         aria-label="Toggle virtual assistant"
       >
         {open ? (
@@ -93,11 +91,11 @@ export default function VirtualAssistant() {
       {/* Chat window */}
       {open && (
         <div className="fixed bottom-24 right-6 z-50 w-[calc(100vw-3rem)] sm:w-96 max-w-md animate-fade-in">
-          <div className="rounded-3xl bg-white shadow-2xl shadow-ink-900/20 border border-ink-100 overflow-hidden flex flex-col" style={{ maxHeight: '70vh' }}>
+          <div className="overflow-hidden border border-ink-200 bg-white shadow-2xl shadow-ink-900/15 flex flex-col" style={{ maxHeight: '70vh' }}>
             {/* Header */}
             <div className="bg-ink-950 p-4 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-electric-500 to-cyan-500 flex items-center justify-center">
-                <Bot className="w-5 h-5 text-white" />
+              <div className="flex h-9 w-9 items-center justify-center border border-cyan-400/30 text-cyan-300">
+                <Bot className="h-4 w-4" />
               </div>
               <div>
                 <p className="font-display font-bold text-white text-sm">IIEI Assistant</p>
@@ -166,7 +164,7 @@ export default function VirtualAssistant() {
                     <button
                       key={i}
                       onClick={() => handleQuickQuestion(q)}
-                      className="text-xs font-medium text-ink-700 bg-white border border-ink-200 hover:border-electric-500 hover:text-electric-600 px-3 py-1.5 rounded-full transition-all"
+                      className="border-b border-ink-300 px-1 py-1.5 text-left text-xs font-medium text-ink-700 transition-colors hover:border-electric-500 hover:text-electric-600"
                     >
                       {q}
                     </button>
@@ -182,7 +180,7 @@ export default function VirtualAssistant() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask a question..."
-                className="flex-1 px-4 py-2.5 rounded-full bg-ink-50 border border-ink-200 text-sm text-ink-900 focus:border-electric-500 focus:ring-2 focus:ring-electric-500/20 transition-all outline-none"
+                className="flex-1 border-b border-ink-300 bg-transparent px-1 py-2.5 text-sm text-ink-900 outline-none transition-all focus:border-electric-500"
               />
               <button
                 type="submit"

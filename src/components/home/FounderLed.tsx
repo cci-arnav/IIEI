@@ -13,10 +13,8 @@ export default function FounderLed() {
               <p className="text-sm font-bold uppercase tracking-wider text-electric-500 mb-4">
                 Founder-Led Learning
               </p>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink-900 tracking-tight">
+              <h2 className="font-display text-4xl font-extrabold text-ink-900 tracking-tight sm:text-5xl lg:text-6xl">
                 250+ founders.
-                <br />
-                <span className="text-gradient-dark">One ecosystem.</span>
               </h2>
               <p className="mt-6 text-lg text-ink-500 leading-relaxed">
                 IIEI's teaching ecosystem brings together 250+ founders, co-founders and industry
@@ -33,11 +31,11 @@ export default function FounderLed() {
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-6">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:grid-cols-6 lg:gap-6">
           {founders.map((founder, i) => (
             <Reveal key={i} delay={i * 60}>
               <div className="group">
-                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-ink-100">
+                <div className="relative aspect-[3/4] overflow-hidden bg-ink-100">
                   <img
                     src={founder.image}
                     alt={founder.name}
@@ -64,7 +62,7 @@ export default function FounderLed() {
               { title: 'Founder Sessions', desc: 'Open conversations about building, failing and growing.' },
               { title: 'Special Courses', desc: 'Structured courses designed and delivered by practitioners.' },
             ].map((item, i) => (
-              <div key={i} className="p-6 rounded-2xl bg-white border border-ink-100">
+                <div key={i} className="editorial-rule p-6 pl-0">
                 <h4 className="font-display font-bold text-ink-900 mb-2">{item.title}</h4>
                 <p className="text-sm text-ink-500">{item.desc}</p>
               </div>

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { programs, commonCurriculum } from '@/data/content';
+import { programs } from '@/data/content';
 import Reveal from '@/components/Reveal';
 
 export default function Curriculum() {
@@ -11,13 +11,11 @@ export default function Curriculum() {
       <div className="section-padding">
         <Reveal>
           <div className="max-w-3xl mb-16">
-            <p className="text-sm font-bold uppercase tracking-wider text-electric-500 mb-4">
+            <p className="editorial-label mb-5">
               Curriculum
             </p>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink-900 tracking-tight">
+            <h2 className="font-display text-4xl font-extrabold text-ink-900 tracking-tight sm:text-5xl">
               Two years. Four semesters.
-              <br />
-              <span className="text-gradient-dark">Built around doing.</span>
             </h2>
             <p className="mt-6 text-lg text-ink-500 leading-relaxed">
               The curriculum for {launchingProgram.shortName} moves from foundation to real-world
@@ -26,7 +24,7 @@ export default function Curriculum() {
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 gap-0 md:grid-cols-2 lg:grid-cols-4">
           {launchingProgram.semesterLabels.map((sem, i) => {
             const subjects =
               i === 0
@@ -39,16 +37,16 @@ export default function Curriculum() {
 
             return (
               <Reveal key={i} delay={i * 100}>
-                <div className="group h-full p-8 rounded-3xl bg-ink-50 hover:bg-ink-900 transition-all duration-500">
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="font-display text-4xl font-extrabold text-ink-200 group-hover:text-ink-700 transition-colors">
+                <div className="group h-full border-t border-ink-200 py-7 pr-8 transition-colors hover:bg-ink-50 lg:pl-5 lg:first:pl-0">
+                  <div className="flex items-start gap-4 mb-7">
+                    <span className="font-display text-5xl font-extrabold text-ink-200 transition-colors group-hover:text-electric-600">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <div>
-                      <div className="text-xs font-bold uppercase tracking-wider text-ink-400 group-hover:text-cyan-400 transition-colors">
+                      <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink-400">
                         {sem.label}
                       </div>
-                      <div className="text-sm font-bold text-ink-900 group-hover:text-white transition-colors">
+                      <div className="text-sm font-bold text-ink-900">
                         {sem.title}
                       </div>
                     </div>
@@ -57,9 +55,9 @@ export default function Curriculum() {
                     {subjects.map((subject, j) => (
                       <li
                         key={j}
-                        className="flex items-start gap-2 text-sm text-ink-600 group-hover:text-ink-200 transition-colors"
+                        className="flex items-start gap-2 text-sm text-ink-600"
                       >
-                        <span className="w-1 h-1 rounded-full bg-electric-500 mt-2 flex-shrink-0" />
+                        <span className="mt-2 h-px w-3 shrink-0 bg-electric-500" />
                         {subject}
                       </li>
                     ))}

@@ -1,5 +1,3 @@
-import { siteSettings } from '@/data/content';
-import Reveal from '@/components/Reveal';
 
 export default function Marquee() {
   return (

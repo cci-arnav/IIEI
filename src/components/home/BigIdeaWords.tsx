@@ -6,6 +6,7 @@ export default function BigIdeaWords() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % bigIdeaWords.length);
     }, 1500);

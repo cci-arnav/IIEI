@@ -6,6 +6,7 @@ export default function LearnByDoing() {
   const [activeWord, setActiveWord] = useState(0);
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const interval = setInterval(() => {
       setActiveWord((prev) => (prev + 1) % learnByDoingWords.length);
     }, 1200);
@@ -30,11 +31,11 @@ export default function LearnByDoing() {
           </div>
         </Reveal>
 
-        <div className="flex flex-wrap items-center justify-center gap-4 lg:gap-6">
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 lg:gap-x-7">
           {learnByDoingWords.map((word, i) => (
             <div key={i} className="flex items-center gap-4 lg:gap-6">
               <span
-                className={`font-display text-3xl sm:text-4xl lg:text-6xl font-extrabold transition-all duration-500 ${
+                  className={`font-display text-3xl font-extrabold transition-all duration-500 sm:text-5xl lg:text-7xl ${
                   i === activeWord
                     ? 'text-gradient scale-110'
                     : 'text-ink-700 scale-100'
@@ -43,7 +44,7 @@ export default function LearnByDoing() {
                 {word}
               </span>
               {i < learnByDoingWords.length - 1 && (
-                <span className="text-2xl lg:text-3xl text-ink-600">→</span>
+                <span className="text-xl text-ink-600 lg:text-2xl">→</span>
               )}
             </div>
           ))}

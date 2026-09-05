@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Zap } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 export default function Logo({ variant = 'dark' }: { variant?: 'dark' | 'light' }) {
   const textColor = variant === 'light' ? 'text-white' : 'text-ink-900';
@@ -7,19 +7,12 @@ export default function Logo({ variant = 'dark' }: { variant?: 'dark' | 'light' 
 
   return (
     <Link to="/" className="flex items-center gap-3 group" aria-label="IIEI Home">
-      <div className="relative">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-electric-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-electric-500/30 group-hover:scale-105 transition-transform duration-300">
-          <Zap className="w-5 h-5 text-white" fill="white" strokeWidth={2.5} />
-        </div>
-        <div className="absolute -inset-1 rounded-xl bg-gradient-to-br from-electric-500 to-cyan-500 opacity-0 group-hover:opacity-20 blur-md transition-opacity duration-300" />
-      </div>
-      <div className="flex flex-col leading-none">
-        <span className={`font-display font-extrabold text-lg tracking-tight ${textColor}`}>
-          IIEI
+      <div className="flex items-center gap-3">
+        <span className={`font-display text-2xl font-extrabold tracking-[-0.08em] ${textColor}`}>IIEI</span>
+        <span className={`hidden border-l pl-3 text-[10px] font-medium uppercase tracking-[0.16em] sm:block ${variant === 'light' ? 'border-white/30' : 'border-ink-200'} ${subColor}`}>
+          Entrepreneurship<br />&amp; Innovation
         </span>
-        <span className={`text-[10px] font-medium tracking-wide ${subColor}`}>
-          Entrepreneurship &amp; Innovation
-        </span>
+        <ArrowUpRight className={`h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 ${subColor}`} />
       </div>
     </Link>
   );

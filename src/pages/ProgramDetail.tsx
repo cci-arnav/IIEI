@@ -16,8 +16,7 @@ export default function ProgramDetail() {
     <>
       {/* Hero */}
       <section className="relative pt-32 lg:pt-40 pb-20 bg-ink-950 grain overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-electric-500/15 blur-[100px]" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-cyan-500/15 blur-[100px]" />
+        <div className="absolute top-0 right-0 h-96 w-96 bg-electric-500/10 blur-[100px]" />
 
         <div className="relative section-padding">
           <Link
@@ -33,11 +32,11 @@ export default function ProgramDetail() {
               <div className="flex items-center gap-3 mb-6">
                 <span className="font-display text-sm font-bold text-ink-500">{program.number}</span>
                 {isLaunching ? (
-                  <span className="text-xs font-bold uppercase tracking-wide text-emerald-300 bg-emerald-500/20 px-3 py-1.5 rounded-full border border-emerald-400/30">
+                  <span className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-300">
                     {program.statusLabel}
                   </span>
                 ) : (
-                  <span className="text-xs font-bold uppercase tracking-wide text-ink-300 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+                  <span className="text-xs font-bold uppercase tracking-[0.16em] text-ink-300">
                     {program.statusLabel}
                   </span>
                 )}
@@ -60,7 +59,7 @@ export default function ProgramDetail() {
               </div>
             </div>
 
-            <div className="relative rounded-3xl overflow-hidden h-80 lg:h-96">
+            <div className="relative h-80 overflow-hidden lg:h-[30rem]">
               <img src={program.image} alt={program.name} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink-950/60 to-transparent" />
             </div>
@@ -79,8 +78,8 @@ export default function ProgramDetail() {
               { icon: Lightbulb, label: 'Philosophy', value: 'Learn by Doing — founder-led, real-world execution.' },
             ].map((card, i) => (
               <Reveal key={i} delay={i * 80}>
-                <div className="h-full p-6 rounded-2xl bg-ink-50 border border-ink-100">
-                  <card.icon className="w-6 h-6 text-electric-500 mb-4" />
+                <div className="h-full border-t border-ink-200 py-6 pr-6">
+                  <card.icon className="mb-4 h-5 w-5 text-electric-500" />
                   <p className="text-xs font-bold uppercase tracking-wider text-ink-400 mb-2">
                     {card.label}
                   </p>
@@ -119,7 +118,7 @@ export default function ProgramDetail() {
 
               return (
                 <Reveal key={i} delay={i * 100}>
-                  <div className="group h-full p-8 rounded-3xl bg-white border border-ink-100 hover:shadow-xl transition-all duration-300">
+                  <div className="group h-full border-t border-ink-200 py-8 pr-6 transition-colors hover:bg-white">
                     <div className="flex items-center gap-3 mb-6">
                       <span className="font-display text-4xl font-extrabold text-ink-200">
                         {String(i + 1).padStart(2, '0')}
@@ -134,7 +133,7 @@ export default function ProgramDetail() {
                     <ul className="space-y-3">
                       {subjects.map((subject, j) => (
                         <li key={j} className="flex items-start gap-2 text-sm text-ink-600">
-                          <span className="w-1 h-1 rounded-full bg-electric-500 mt-2 flex-shrink-0" />
+                          <span className="mt-2 h-px w-3 flex-shrink-0 bg-electric-500" />
                           {subject}
                         </li>
                       ))}
@@ -165,7 +164,7 @@ export default function ProgramDetail() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {program.careerPathways.map((path, i) => (
                 <Reveal key={i} delay={i * 80}>
-                  <div className="flex items-center gap-3 p-6 rounded-2xl bg-ink-50 border border-ink-100">
+                  <div className="flex items-center gap-3 border-t border-ink-200 py-6">
                     <CheckCircle2 className="w-5 h-5 text-electric-500 flex-shrink-0" />
                     <span className="font-medium text-ink-900">{path}</span>
                   </div>

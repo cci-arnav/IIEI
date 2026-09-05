@@ -19,7 +19,7 @@ export default function Footer() {
                 <a
                   key={i}
                   href="#"
-                  className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  className="flex h-10 w-10 items-center justify-center border border-white/15 transition-colors duration-300 hover:border-cyan-300"
                   aria-label="Social link"
                 >
                   <Icon className="w-4 h-4 text-ink-300" />
@@ -76,7 +76,7 @@ export default function Footer() {
             </ul>
             <Link
               to="/apply"
-              className="inline-flex items-center gap-2 mt-6 text-sm font-semibold text-white bg-white/10 hover:bg-white/20 px-6 py-3 rounded-full transition-all duration-300"
+              className="inline-flex items-center gap-2 mt-6 border-b border-white/30 pb-2 text-sm font-semibold text-white transition-colors duration-300 hover:border-cyan-300 hover:text-cyan-300"
             >
               Apply Now
               <ArrowUpRight className="w-4 h-4" />

@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Play, Sparkles } from 'lucide-react';
 import { heroStatCards, siteSettings } from '@/data/content';
 import AnimatedCounter from '@/components/AnimatedCounter';
+import HeroVisual from './HeroVisual';
 
 export default function Hero() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.matchMedia('(pointer: coarse)').matches) return;
     const handler = (e: MouseEvent) => {
       setMousePos({
         x: (e.clientX / window.innerWidth - 0.5) * 20,
@@ -22,11 +24,11 @@ export default function Hero() {
     <section className="relative min-h-screen bg-ink-950 overflow-hidden grain">
       {/* Animated gradient orbs */}
       <div
-        className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full blur-[120px] opacity-30 bg-electric-500 transition-transform duration-1000 ease-out"
+        className="pointer-events-none absolute top-1/4 left-1/4 h-[min(600px,70vw)] w-[min(600px,70vw)] rounded-full bg-electric-500 opacity-20 blur-[120px] transition-transform duration-1000 ease-out"
         style={{ transform: `translate(${mousePos.x}px, ${mousePos.y}px)` }}
       />
       <div
-        className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full blur-[120px] opacity-20 bg-cyan-500 transition-transform duration-1000 ease-out"
+        className="pointer-events-none absolute bottom-1/4 right-1/4 h-[min(500px,60vw)] w-[min(500px,60vw)] rounded-full bg-cyan-500 opacity-15 blur-[120px] transition-transform duration-1000 ease-out"
         style={{ transform: `translate(${-mousePos.x}px, ${-mousePos.y}px)` }}
       />
 
@@ -39,8 +41,9 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative section-padding pt-32 lg:pt-40 pb-20 min-h-screen flex flex-col justify-center">
-        <div className="max-w-6xl">
+      <div className="relative section-padding flex min-h-screen flex-col justify-center py-28 lg:py-32">
+        <div className="mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
+          <div className="min-w-0">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8 animate-fade-in">
             <Sparkles className="w-4 h-4 text-cyan-400" />
             <span className="text-sm text-ink-200 font-medium">
@@ -48,7 +51,7 @@ export default function Hero() {
             </span>
           </div>
 
-          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-[1.05] tracking-tight animate-slide-up">
+          <h1 className="font-display text-[clamp(3rem,7vw,6.5rem)] font-extrabold leading-[1.02] tracking-tight animate-slide-up">
             <span className="text-gradient">Learn</span>
             <br />
             <span className="text-white">by </span>
@@ -58,7 +61,7 @@ export default function Hero() {
             </span>
           </h1>
 
-          <p className="mt-8 text-lg lg:text-xl text-ink-300 max-w-2xl leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink-300 sm:text-lg lg:text-xl animate-fade-in" style={{ animationDelay: '0.2s' }}>
             The {siteSettings.instituteName} — a new generation entrepreneurship and innovation institution built around founder-led learning, real-world execution, and the belief that you learn by doing.
           </p>
 
@@ -79,25 +82,26 @@ export default function Hero() {
             </Link>
           </div>
 
-          {/* Stat cards */}
-          <div className="mt-16 lg:mt-20 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+          </div>
+
+          <div className="hidden lg:block">
+            <HeroVisual />
+          </div>
+          <div className="lg:hidden">
+            <HeroVisual />
+          </div>
+
+          <div className="mt-2 grid grid-cols-2 border-y border-white/15 py-5 sm:grid-cols-3 lg:col-span-2 lg:mt-8 lg:grid-cols-5 animate-fade-in" style={{ animationDelay: '0.6s' }}>
             {heroStatCards.map((stat, i) => {
               const numeric = parseInt(stat.value.replace(/[^0-9]/g, ''));
               const hasPlus = stat.value.includes('+');
               return (
-                <div
-                  key={i}
-                  className="group p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] hover:border-white/[0.15] transition-all duration-300"
-                >
-                  <div className="font-display text-3xl lg:text-4xl font-extrabold text-white">
-                    {numeric > 0 ? (
-                      <AnimatedCounter value={numeric} suffix={hasPlus ? '+' : ''} />
-                    ) : (
-                      stat.value
-                    )}
+                <div key={i} className="group min-w-0 border-r border-white/10 px-4 py-1 first:pl-0 last:border-r-0 sm:px-5 lg:first:pl-0">
+                  <div className="font-display text-3xl font-extrabold text-white lg:text-4xl">
+                    {numeric > 0 ? <AnimatedCounter value={numeric} suffix={hasPlus ? '+' : ''} /> : stat.value}
                   </div>
-                  <div className="text-xs font-bold text-cyan-400 mt-2 tracking-wider">{stat.label}</div>
-                  <div className="text-xs text-ink-400 mt-1">{stat.sublabel}</div>
+                  <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-400">{stat.label}</div>
+                  <div className="mt-1 text-[11px] leading-snug text-ink-400">{stat.sublabel}</div>
                 </div>
               );
             })}

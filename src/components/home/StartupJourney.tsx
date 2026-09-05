@@ -1,6 +1,5 @@
 import { startupJourney } from '@/data/content';
 import Reveal from '@/components/Reveal';
-import { ArrowRight } from 'lucide-react';
 
 export default function StartupJourney() {
   return (
@@ -27,16 +26,16 @@ export default function StartupJourney() {
           {/* Horizontal line */}
           <div className="hidden lg:block absolute top-12 left-0 right-0 h-0.5 bg-gradient-to-r from-electric-500 via-cyan-500 to-electric-500 opacity-20" />
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 lg:gap-2">
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 lg:grid-cols-8 lg:gap-2">
             {startupJourney.map((stage, i) => (
               <Reveal key={i} delay={i * 80}>
                 <div className="flex flex-col items-center text-center group">
-                  <div className="relative w-24 h-24 rounded-full bg-ink-50 border-2 border-ink-100 group-hover:border-electric-500 group-hover:bg-electric-50 flex items-center justify-center transition-all duration-300 group-hover:scale-105 z-10">
-                    <span className="font-display text-2xl font-extrabold text-ink-300 group-hover:text-electric-600 transition-colors">
+                  <div className="relative z-10 flex h-20 w-20 items-center justify-center rounded-full border-2 border-ink-100 bg-ink-50 transition-all duration-300 group-hover:border-electric-500 group-hover:bg-electric-50 group-hover:scale-105 sm:h-24 sm:w-24">
+                    <span className="font-display text-xl font-extrabold text-ink-300 transition-colors group-hover:text-electric-600 sm:text-2xl">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                   </div>
-                  <span className="mt-4 text-sm font-bold text-ink-700 group-hover:text-ink-900 transition-colors">
+                  <span className="mt-4 max-w-[8rem] break-words text-xs font-bold text-ink-700 transition-colors group-hover:text-ink-900 sm:text-sm">
                     {stage}
                   </span>
                 </div>

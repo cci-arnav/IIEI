@@ -1,4 +1,4 @@
-import { feeCategories, siteSettings } from '@/data/content';
+import { feeCategories } from '@/data/content';
 import Reveal from '@/components/Reveal';
 import AnimatedCounter from '@/components/AnimatedCounter';
 import { CheckCircle2 } from 'lucide-react';

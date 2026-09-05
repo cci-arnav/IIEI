@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { programs } from '@/data/content';
 import Reveal from '@/components/Reveal';
 
@@ -8,14 +8,12 @@ export default function Programs() {
     <section id="programs" className="py-24 lg:py-32 bg-ink-50">
       <div className="section-padding">
         <Reveal>
-          <div className="max-w-3xl mb-16">
-            <p className="text-sm font-bold uppercase tracking-wider text-electric-500 mb-4">
+          <div className="max-w-4xl mb-14">
+            <p className="editorial-label mb-5">
               Our Programs
             </p>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink-900 tracking-tight">
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-ink-900 tracking-tight">
               Four programs. One philosophy.
-              <br />
-              <span className="text-gradient-dark">Learn by Doing.</span>
             </h2>
             <p className="mt-6 text-lg text-ink-500 leading-relaxed">
               One program is launching now. Three are coming soon. Each is built around the same
@@ -25,72 +23,37 @@ export default function Programs() {
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {programs.map((prog, i) => (
-            <Reveal key={prog.id} delay={i * 100}>
-              <Link
-                to={`/programs/${prog.slug}`}
-                className="group block h-full bg-white rounded-3xl overflow-hidden border border-ink-100 hover:border-ink-200 hover:shadow-2xl hover:shadow-ink-900/10 transition-all duration-500"
-              >
-                <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={prog.image}
-                    alt={prog.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-ink-950/20 to-transparent" />
-                  <div className="absolute top-4 left-4 flex items-center gap-2">
-                    <span className="text-xs font-bold text-white/80 bg-ink-950/40 backdrop-blur-md px-3 py-1.5 rounded-full">
-                      {prog.number}
-                    </span>
-                    {prog.status === 'launching' ? (
-                      <span className="text-xs font-bold uppercase tracking-wide text-emerald-300 bg-emerald-500/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-emerald-400/30">
-                        {prog.statusLabel}
-                      </span>
-                    ) : (
-                      <span className="text-xs font-bold uppercase tracking-wide text-ink-200 bg-ink-950/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
-                        {prog.statusLabel}
-                      </span>
-                    )}
-                  </div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="font-display text-xl lg:text-2xl font-extrabold text-white">
-                      {prog.name}
-                    </h3>
+        <div className="grid grid-cols-1 gap-0 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
+          <Reveal>
+            {(() => {
+              const flagship = programs[0];
+              return <Link to={`/programs/${flagship.slug}`} className="group block border-t-2 border-ink-900 pt-5">
+                <div className="relative aspect-[16/9] overflow-hidden bg-ink-900">
+                  <img src={flagship.image} alt={flagship.name} className="h-full w-full object-cover grayscale-[20%] transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-transparent to-transparent" />
+                  <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 text-white">
+                    <span className="editorial-label text-cyan-300">{flagship.statusLabel}</span>
+                    <ArrowUpRight className="h-6 w-6 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                   </div>
                 </div>
-
-                <div className="p-6 lg:p-8">
-                  <p className="text-sm text-ink-500 leading-relaxed line-clamp-3">
-                    {prog.description}
-                  </p>
-
-                  {prog.status === 'launching' && (
-                    <div className="mt-5 flex flex-wrap gap-2">
-                      {prog.careerPathways.slice(0, 3).map((path) => (
-                        <span
-                          key={path}
-                          className="inline-flex items-center gap-1 text-xs font-medium text-ink-600 bg-ink-50 px-3 py-1.5 rounded-full"
-                        >
-                          <CheckCircle2 className="w-3 h-3 text-electric-500" />
-                          {path}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-
-                  <div className="mt-6 flex items-center justify-between">
-                    <span className="text-sm font-semibold text-ink-900 group-hover:text-electric-600 transition-colors">
-                      {prog.status === 'launching' ? 'View Program Details' : 'Learn More'}
-                    </span>
-                    <div className="w-10 h-10 rounded-full bg-ink-100 group-hover:bg-electric-500 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
-                      <ArrowRight className="w-4 h-4 text-ink-600 group-hover:text-white transition-colors" />
-                    </div>
-                  </div>
+                <div className="mt-5 flex gap-5">
+                  <span className="font-display text-2xl font-bold text-electric-600">{flagship.number}</span>
+                  <div><h3 className="font-display text-2xl font-bold text-ink-900 sm:text-3xl">{flagship.name}</h3><p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-500">{flagship.description}</p></div>
                 </div>
-              </Link>
-            </Reveal>
-          ))}
+              </Link>;
+            })()}
+          </Reveal>
+          <div className="mt-12 lg:mt-0">
+            {programs.slice(1).map((prog, i) => (
+              <Reveal key={prog.id} delay={(i + 1) * 80}>
+                <Link to={`/programs/${prog.slug}`} className="group editorial-rule flex items-start gap-5 py-6 first:border-t-0">
+                  <span className="font-display text-xl font-bold text-ink-300 group-hover:text-electric-600">{prog.number}</span>
+                  <span className="min-w-0 flex-1"><span className="block font-display text-lg font-bold text-ink-900">{prog.name}</span><span className="mt-2 block text-xs font-bold uppercase tracking-wider text-ink-400">{prog.statusLabel}</span></span>
+                  <ArrowUpRight className="h-5 w-5 text-ink-400 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+                </Link>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>
