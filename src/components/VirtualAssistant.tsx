@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, type FormEvent } from 'react';
 import { MessageCircle, X, Send, Bot, User, Sparkles } from 'lucide-react';
-import { faqs, programs, siteSettings } from '@/data/content';
+import { faqs, programs, siteSettings, degreeStructures } from '@/data/content';
 
 interface Message {
   role: 'bot' | 'user';
@@ -8,50 +8,85 @@ interface Message {
 }
 
 const quickQuestions = [
-  'What is IIEI?',
-  'How long is the program?',
-  'What is the program fee?',
-  'Which program is launching now?',
-  'Does IIEI provide hostel accommodation?',
+  'What programs are offered?',
+  'Undergraduate duration & fee',
+  'Postgraduate duration & fee',
+  'Who teaches at IIEI?',
   'Are internships included?',
+  'Does IIEI provide hostel?',
 ];
 
 function findAnswer(question: string): string {
-  const lower = question.toLowerCase();
-  if (/^(hi|hello|hey| namaste)\b/.test(lower.trim())) {
-    return 'Hello! Welcome to IIEI. How can I help you today?';
+  const lower = question.toLowerCase().trim();
+
+  // Greetings
+  if (/^(hi|hello|hey|namaste|good morning|good evening)\b/.test(lower)) {
+    return `Hi! Welcome to IIEI (Indian Institute of Entrepreneurship & Innovation). I can help you explore our program areas, undergraduate and postgraduate structures, fees, founder-led learning, and admissions. What would you like to know?`;
   }
-  if (lower.includes('what is iiei') || lower.includes('about iiei')) {
-    return `${siteSettings.instituteName} is a founder-led entrepreneurship and innovation institution initiated by ${siteSettings.initiatedByShort}. Its learning philosophy is ${siteSettings.tagline.toLowerCase()}`;
+
+  // What programs
+  if (lower.includes('what program') || lower.includes('programs offered') || lower.includes('which program') || lower.includes('courses')) {
+    return `IIEI offers four specialized program areas:\n1. Entrepreneurship & Innovation (Now Launching)\n2. AgriTech Management (Coming Soon)\n3. Financial Management (Coming Soon)\n4. Logistics & Supply Chain Management (Coming Soon)\n\nEach is available across Undergraduate (3 Years) and Postgraduate (2 Years) tracks.`;
   }
-  if (lower.includes('fee') || lower.includes('cost')) return `The total programme fee is ${siteSettings.totalProgramFeeDisplay} for ${siteSettings.duration.toLowerCase()}.`;
-  if (lower.includes('hostel') || lower.includes('accommodation')) return 'IIEI does not currently provide hostel accommodation.';
-  if (lower.includes('semester') || lower.includes('how long') || lower.includes('duration')) return `The programme runs for ${siteSettings.duration} across ${siteSettings.semesters} semesters.`;
-  if (lower.includes('programme') || lower.includes('program')) return `The current programme directory includes ${programs.map((program) => program.shortName).join(', ')}. Entrepreneurship & Innovation is now launching; the other three are coming soon.`;
-  if (lower.includes('internship')) return 'Multiple internships across startups, venture firms and innovation teams are part of the practical learning ecosystem.';
-  if (lower.includes('ppo') || lower.includes('pre-placement')) return 'IIEI has a PPO commitment designed around practical experience and industry exposure.';
-  if (lower.includes('funding')) return 'IIEI has an institutional funding commitment to support promising student ventures through its entrepreneurship ecosystem.';
-  const match = faqs.find(
-    (f) =>
-      lower.includes(f.question.toLowerCase().slice(0, 10)) ||
-      f.question.toLowerCase().includes(lower.slice(0, 10))
+
+  // Fees & Investment
+  if (lower.includes('fee') || lower.includes('cost') || lower.includes('investment') || lower.includes('tuition')) {
+    return `IIEI program investment is structured by degree level:\n• Undergraduate (3 Years): ₹25,00,000 (₹25 Lakh)\n• Postgraduate (2 Years): ₹30,00,000 (₹30 Lakh)\n\nBoth cover academic tuition, masterclasses with 250+ founders, experiential learning labs, industry internships, and startup incubation support.`;
+  }
+
+  // Duration
+  if (lower.includes('duration') || lower.includes('how long') || lower.includes('years') || lower.includes('semester')) {
+    return `Program durations at IIEI:\n• Undergraduate Track: 3 Years\n• Postgraduate Track: 2 Years (4 Semesters)\n\nBoth tracks combine classroom learning with real-world startup building and internships.`;
+  }
+
+  // Undergraduate specifics
+  if (lower.includes('ug') || lower.includes('undergraduate') || lower.includes('bachelor')) {
+    return `The Undergraduate program is 3 Years in duration with an indicative investment of ₹25,00,000 (₹25 Lakh). Cohort capacity is strictly capped at 60 students to ensure intensive founder-led mentorship.`;
+  }
+
+  // Postgraduate specifics
+  if (lower.includes('pg') || lower.includes('postgraduate') || lower.includes('masters')) {
+    return `The Postgraduate program is 2 Years (4 Semesters) with an indicative investment of ₹30,00,000 (₹30 Lakh). Cohort capacity is 60 students focused on advanced venture creation and scaling.`;
+  }
+
+  // Founder network
+  if (lower.includes('founder') || lower.includes('faculty') || lower.includes('teacher') || lower.includes('who teach')) {
+    return `IIEI features a teaching ecosystem of 250+ founders and co-founders who lead masterclasses, practical courses, and venture reviews. You learn directly from operators who have founded and scaled real companies.`;
+  }
+
+  // Internships
+  if (lower.includes('internship') || lower.includes('industry exposure') || lower.includes('work')) {
+    return `Yes, multiple internships are an integral part of the curriculum. Students work directly on live deliverables across startups, venture firms, and corporate innovation teams.`;
+  }
+
+  // PPO
+  if (lower.includes('ppo') || lower.includes('placement') || lower.includes('job')) {
+    return `IIEI maintains an explicit PPO (Pre-Placement Opportunity) commitment, preparing students for high-impact operator and leadership opportunities through our industry partner network.`;
+  }
+
+  // Funding
+  if (lower.includes('funding') || lower.includes('invest') || lower.includes('capital') || lower.includes('venture backing')) {
+    return `Yes. IIEI provides an institutional funding commitment and venture incubation infrastructure to support high-potential student ventures.`;
+  }
+
+  // Hostel / Accommodation
+  if (lower.includes('hostel') || lower.includes('stay') || lower.includes('accommodation') || lower.includes('dorm')) {
+    return `No. IIEI currently does not provide hostel accommodation or boarding facilities. Students make their own independent living arrangements.`;
+  }
+
+  // Application / Admissions
+  if (lower.includes('apply') || lower.includes('admission') || lower.includes('join') || lower.includes('form')) {
+    return `Admissions are open for the launch cohort of Entrepreneurship & Innovation. You can click 'Apply Now' in the navigation to fill out the official IIEI admissions form, or click 'Enquire' to connect with an advisor.`;
+  }
+
+  // Match FAQ answers
+  const matchedFaq = faqs.find((f) =>
+    lower.includes(f.question.toLowerCase().slice(0, 15)) ||
+    f.question.toLowerCase().includes(lower.slice(0, 15))
   );
-  if (match) return match.answer;
+  if (matchedFaq) return matchedFaq.answer;
 
-  if (lower.includes('apply') || lower.includes('application'))
-    return 'The application process has five steps: Explore the Program, Talk to an Advisor, Submit Application, Selection Process, and Join IIEI. You can start your application on the Apply Now page.';
-  if (lower.includes('contact') || lower.includes('advisor'))
-    return 'You can reach our admissions team at admissions@iiei.in or through the Contact page. We\'d be happy to schedule a one-on-one session.';
-  if (lower.includes('founder'))
-    return 'IIEI\'s teaching ecosystem includes 250+ founders and co-founders who conduct special courses, masterclasses and sessions. These are real practitioners who have built companies.';
-  if (lower.includes('startup') || lower.includes('build'))
-    return 'Absolutely! Entrepreneurship is central to the IIEI learning philosophy. Students can work through idea validation, prototyping, market testing, pitching and venture building as part of the ecosystem.';
-
-  const fallbacks = [
-    'I am not sure about that yet. I can help with IIEI programmes, admissions, fees, internships, founder-led learning, or the application process.',
-    'I do not have that detail yet. Try asking about the programme, fee, duration, hostel, internships, founders, or admissions.',
-  ];
-  return fallbacks[question.trim().length % fallbacks.length];
+  return `I can help you with details on IIEI programs, Undergraduate (3 Yrs, ₹25L) and Postgraduate (2 Yrs, ₹30L) tracks, founder-led learning, internships, and admissions. Feel free to ask!`;
 }
 
 export default function VirtualAssistant() {
@@ -59,7 +94,7 @@ export default function VirtualAssistant() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'bot',
-      text: "Hi! I'm the IIEI Virtual Assistant. Ask me anything about the program, fees, curriculum, or the application process.",
+      text: "Hi! Welcome to IIEI. How can I assist you with our academic programs, degree tracks, fees, or admissions today?",
     },
   ]);
   const [input, setInput] = useState('');
@@ -76,95 +111,114 @@ export default function VirtualAssistant() {
 
     const userMessage: Message = { role: 'user', text: input };
     setMessages((prev) => [...prev, userMessage]);
+    const query = input;
     setInput('');
     setTyping(true);
 
     setTimeout(() => {
-      const answer = findAnswer(input);
+      const answer = findAnswer(query);
       setMessages((prev) => [...prev, { role: 'bot', text: answer }]);
       setTyping(false);
-    }, 800);
+    }, 450);
   };
 
   const handleQuickQuestion = (question: string) => {
-    setInput(question);
+    const userMessage: Message = { role: 'user', text: question };
+    setMessages((prev) => [...prev, userMessage]);
+    setTyping(true);
+
+    setTimeout(() => {
+      const answer = findAnswer(question);
+      setMessages((prev) => [...prev, { role: 'bot', text: answer }]);
+      setTyping(false);
+    }, 400);
   };
 
   return (
     <>
-      {/* Toggle button */}
+      {/* Floating Toggle Button */}
       <button
+        type="button"
         onClick={() => setOpen(!open)}
-        className={`fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-ink-900 text-white shadow-xl shadow-ink-900/20 transition-all duration-300 hover:bg-electric-600 ${open ? 'rotate-90' : ''}`}
-        aria-label="Toggle virtual assistant"
+        className={`fixed bottom-6 right-6 z-50 flex h-13 w-13 items-center justify-center border border-white/20 bg-ink-900 text-white dark:bg-white dark:text-ink-950 shadow-2xl transition-all duration-300 hover:bg-ochre-600 dark:hover:bg-ochre-400 ${
+          open ? 'rotate-90' : ''
+        }`}
+        aria-label="Toggle virtual admissions assistant"
       >
-        {open ? (
-          <X className="w-6 h-6 text-white" />
-        ) : (
-          <MessageCircle className="w-6 h-6 text-white" />
-        )}
+        {open ? <X className="w-5 h-5" /> : <MessageCircle className="w-5 h-5" />}
       </button>
 
-      {/* Chat window */}
+      {/* Chat Window */}
       {open && (
-        <div className="fixed inset-x-3 bottom-3 z-50 animate-fade-in sm:inset-x-auto sm:bottom-24 sm:right-6 sm:w-[28rem]">
-          <div className="flex h-[min(680px,calc(100vh-6rem))] max-h-[calc(100vh-6rem)] flex-col overflow-hidden border border-ink-200 bg-white shadow-2xl shadow-ink-900/15">
+        <div className="fixed inset-x-3 bottom-3 z-50 sm:inset-x-auto sm:bottom-22 sm:right-6 sm:w-[420px] animate-fade-in">
+          <div className="flex h-[min(640px,calc(100vh-6rem))] flex-col border border-ink-900/20 dark:border-white/20 bg-white dark:bg-ink-950 shadow-2xl">
             {/* Header */}
-            <div className="bg-ink-950 p-4 flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center border border-cyan-400/30 text-cyan-300">
-                <Bot className="h-4 w-4" />
+            <div className="bg-ink-900 dark:bg-ink-900 text-white p-4 flex items-center justify-between border-b border-ink-800">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-ochre-500/20 border border-ochre-400 text-ochre-300 flex items-center justify-center font-bold text-xs">
+                  IIEI
+                </div>
+                <div>
+                  <p className="font-display font-bold text-sm leading-tight">Admissions Assistant</p>
+                  <p className="text-[11px] text-ink-300 flex items-center gap-1.5 mt-0.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    Online · Official Guidance
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="font-display font-bold text-white text-sm">IIEI Assistant</p>
-                <p className="text-xs text-ink-400 flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                  Online
-                </p>
-              </div>
-              <Sparkles className="w-4 h-4 text-cyan-400 ml-auto" />
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="text-ink-400 hover:text-white p-1"
+                aria-label="Close chat"
+              >
+                <X className="w-4 h-4" />
+              </button>
             </div>
 
-            {/* Messages */}
-            <div className="min-h-0 flex-1 overflow-y-auto bg-ink-50 p-5 space-y-5">
+            {/* Message Area: LARGE & PROMINENT */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-ivory-50 dark:bg-ink-900/50">
               {messages.map((msg, i) => (
                 <div
                   key={i}
-                  className={`flex items-start gap-2 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}
+                  className={`flex items-start gap-2.5 ${
+                    msg.role === 'user' ? 'flex-row-reverse' : ''
+                  }`}
                 >
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                    className={`w-7 h-7 flex items-center justify-center shrink-0 border ${
                       msg.role === 'bot'
-                        ? 'bg-gradient-to-br from-electric-500 to-cyan-500'
-                        : 'bg-ink-200'
+                        ? 'bg-ink-900 text-white dark:bg-white dark:text-ink-950 border-transparent'
+                        : 'bg-ochre-500 text-ink-950 border-ochre-600'
                     }`}
                   >
                     {msg.role === 'bot' ? (
-                      <Bot className="w-4 h-4 text-white" />
+                      <Bot className="w-3.5 h-3.5" />
                     ) : (
-                      <User className="w-4 h-4 text-ink-600" />
+                      <User className="w-3.5 h-3.5" />
                     )}
                   </div>
                   <div
-                    className={`max-w-[75%] p-3 rounded-2xl text-sm leading-relaxed ${
+                    className={`max-w-[82%] p-3.5 text-xs sm:text-sm leading-relaxed border ${
                       msg.role === 'bot'
-                        ? 'bg-white text-ink-700 rounded-tl-sm'
-                        : 'bg-ink-900 text-white rounded-tr-sm'
+                        ? 'bg-white dark:bg-ink-900 text-ink-800 dark:text-ink-100 border-ink-900/10 dark:border-white/10'
+                        : 'bg-ink-900 text-white dark:bg-white dark:text-ink-950 border-transparent'
                     }`}
                   >
-                    {msg.text}
+                    <p className="whitespace-pre-line">{msg.text}</p>
                   </div>
                 </div>
               ))}
 
               {typing && (
-                <div className="flex items-start gap-2">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-electric-500 to-cyan-500 flex items-center justify-center flex-shrink-0">
-                    <Bot className="w-4 h-4 text-white" />
+                <div className="flex items-start gap-2.5">
+                  <div className="w-7 h-7 flex items-center justify-center shrink-0 bg-ink-900 text-white dark:bg-white dark:text-ink-950">
+                    <Bot className="w-3.5 h-3.5" />
                   </div>
-                  <div className="bg-white p-3 rounded-2xl rounded-tl-sm flex items-center gap-1">
-                    <span className="w-2 h-2 rounded-full bg-ink-300 animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <span className="w-2 h-2 rounded-full bg-ink-300 animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <span className="w-2 h-2 rounded-full bg-ink-300 animate-bounce" style={{ animationDelay: '300ms' }} />
+                  <div className="p-3 bg-white dark:bg-ink-900 border border-ink-900/10 dark:border-white/10 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 bg-ink-400 rounded-full animate-bounce" />
+                    <span className="w-1.5 h-1.5 bg-ink-400 rounded-full animate-bounce [animation-delay:150ms]" />
+                    <span className="w-1.5 h-1.5 bg-ink-400 rounded-full animate-bounce [animation-delay:300ms]" />
                   </div>
                 </div>
               )}
@@ -172,36 +226,36 @@ export default function VirtualAssistant() {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Quick questions */}
-            {messages.length === 1 && (
-              <div className="px-4 pb-2 bg-ink-50">
-                <p className="text-xs text-ink-400 mb-2">Quick questions:</p>
-                <div className="flex flex-wrap gap-2">
-                  {quickQuestions.map((q, i) => (
-                    <button
-                      key={i}
-                      onClick={() => handleQuickQuestion(q)}
-                      className="border-b border-ink-300 px-1 py-1.5 text-left text-xs font-medium text-ink-700 transition-colors hover:border-electric-500 hover:text-electric-600"
-                    >
-                      {q}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
+            {/* Compact Quick Action Chips */}
+            <div className="px-3 py-2 border-t border-ink-900/10 dark:border-white/10 bg-white dark:bg-ink-950 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+              {quickQuestions.map((q, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => handleQuickQuestion(q)}
+                  className="whitespace-nowrap px-2.5 py-1 text-[11px] font-semibold border border-ink-200 dark:border-ink-800 text-ink-700 dark:text-ink-300 hover:border-ink-900 dark:hover:border-white hover:text-ink-900 dark:hover:text-white transition-colors"
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
 
-            {/* Input */}
-            <form onSubmit={handleSend} className="p-3 bg-white border-t border-ink-100 flex items-center gap-2">
+            {/* Input Bar */}
+            <form
+              onSubmit={handleSend}
+              className="p-3 bg-white dark:bg-ink-950 border-t border-ink-900/10 dark:border-white/10 flex items-center gap-2"
+            >
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask a question..."
-                className="flex-1 border-b border-ink-300 bg-transparent px-1 py-2.5 text-sm text-ink-900 outline-none transition-all focus:border-electric-500"
+                placeholder="Ask about programs, UG/PG fees, founders..."
+                className="flex-1 text-xs sm:text-sm px-3 py-2.5 border border-ink-200 dark:border-ink-800 bg-transparent text-ink-900 dark:text-white placeholder:text-ink-400 focus:border-ink-900 dark:focus:border-white focus:outline-none"
               />
               <button
                 type="submit"
-                className="w-10 h-10 rounded-full bg-electric-500 text-white flex items-center justify-center hover:bg-electric-600 transition-all flex-shrink-0"
+                disabled={!input.trim()}
+                className="w-10 h-10 bg-ink-900 text-white dark:bg-white dark:text-ink-950 flex items-center justify-center hover:bg-ochre-600 dark:hover:bg-ochre-400 disabled:opacity-40 transition-colors shrink-0"
                 aria-label="Send message"
               >
                 <Send className="w-4 h-4" />

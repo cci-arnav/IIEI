@@ -1,43 +1,39 @@
 import { industryCards } from '@/data/content';
 import Reveal from '@/components/Reveal';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Briefcase, Network, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function IndustryExposure() {
   return (
-    <section className="py-24 lg:py-32 bg-ink-950 grain overflow-hidden">
+    <section className="py-24 lg:py-32 bg-ink-950 text-white border-b border-white/10 overflow-hidden">
       <div className="section-padding">
         <Reveal>
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16 border-b border-white/15 pb-8">
             <div className="max-w-2xl">
-              <p className="text-sm font-bold uppercase tracking-wider text-cyan-400 mb-4">
-                Industry Exposure
-              </p>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-                Where learning meets
-                <br />
-                <span className="text-gradient">the real world.</span>
+              <span className="editorial-label text-ochre-400">Industry Exposure</span>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mt-3">
+                Where Education Meets Enterprise.
               </h2>
-              <p className="mt-6 text-lg text-ink-400 leading-relaxed">
-                Students connect with real business environments through internships, live
-                projects, founder sessions and industry partnerships across multiple sectors.
+              <p className="mt-4 text-base sm:text-lg text-ink-300 leading-relaxed">
+                Integrated corporate innovation sprints, startup venture internships, and dedicated PPO commitments.
               </p>
             </div>
             <Link
               to="/industry"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-cyan-400 transition-colors whitespace-nowrap"
+              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white hover:text-ochre-400 transition-colors"
             >
-              Explore industry ecosystem
+              Explore Industry Partners
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-3 lg:gap-4">
+        {/* Sector Cards Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3 sm:gap-4 mb-14">
           {industryCards.map((card, i) => (
-            <Reveal key={i} delay={i * 50}>
-              <div className="group aspect-square rounded-2xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.08] hover:border-cyan-400/30 flex flex-col items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer">
-                <span className="font-display text-lg lg:text-xl font-bold text-ink-300 group-hover:text-cyan-400 transition-colors text-center px-2">
+            <Reveal key={i} delay={i * 40}>
+              <div className="border border-white/15 bg-white/5 p-4 text-center hover:bg-white/10 hover:border-white/30 transition-colors">
+                <span className="font-display text-xs sm:text-sm font-bold text-white block">
                   {card}
                 </span>
               </div>
@@ -45,21 +41,32 @@ export default function IndustryExposure() {
           ))}
         </div>
 
-        <Reveal delay={300}>
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { stat: 'Multiple', label: 'Internships', desc: 'Across startups, ventures and innovation teams' },
-              { stat: '250+', label: 'Founder Network', desc: 'Direct access to builders and practitioners' },
-              { stat: 'Real', label: 'Projects', desc: 'Live business problems with real deliverables' },
-            ].map((item, i) => (
-              <div key={i} className="p-8 rounded-3xl bg-white/[0.03] border border-white/[0.08]">
-                <div className="font-display text-3xl font-extrabold text-gradient mb-2">
-                  {item.stat}
-                </div>
-                <div className="text-sm font-bold text-white">{item.label}</div>
-                <p className="text-sm text-ink-400 mt-1">{item.desc}</p>
-              </div>
-            ))}
+        {/* Three Institutional Commitments */}
+        <Reveal delay={200}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="border border-white/15 bg-white/5 p-8">
+              <Briefcase className="w-6 h-6 text-ochre-400 mb-4" />
+              <h4 className="font-display font-bold text-lg text-white mb-2">Multiple Internships</h4>
+              <p className="text-xs sm:text-sm text-ink-300 leading-relaxed">
+                Mandatory industry immersions embedded across the academic terms with real project deliverables.
+              </p>
+            </div>
+
+            <div className="border border-white/15 bg-white/5 p-8">
+              <TrendingUp className="w-6 h-6 text-ochre-400 mb-4" />
+              <h4 className="font-display font-bold text-lg text-white mb-2">PPO Commitment</h4>
+              <p className="text-xs sm:text-sm text-ink-300 leading-relaxed">
+                An explicit institutional commitment towards connecting high-performing students with Pre-Placement Opportunities.
+              </p>
+            </div>
+
+            <div className="border border-white/15 bg-white/5 p-8">
+              <Network className="w-6 h-6 text-ochre-400 mb-4" />
+              <h4 className="font-display font-bold text-lg text-white mb-2">Institutional Funding</h4>
+              <p className="text-xs sm:text-sm text-ink-300 leading-relaxed">
+                Structured support and access to institutional capital networks for student-led enterprise ventures.
+              </p>
+            </div>
           </div>
         </Reveal>
       </div>

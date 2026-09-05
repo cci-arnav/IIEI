@@ -1,36 +1,40 @@
 import FormLink from '@/components/FormLink';
 import Reveal from '@/components/Reveal';
+import { ArrowUpRight } from 'lucide-react';
 
 export default function FinalCTA() {
   return (
-    <section className="py-24 lg:py-32 bg-ink-950 grain overflow-hidden">
+    <section className="py-24 lg:py-32 bg-ink-950 text-white border-b border-white/10 overflow-hidden">
       <div className="section-padding">
         <Reveal>
-          <div className="relative max-w-5xl mx-auto">
-            {/* Gradient orbs */}
-            <div className="absolute -top-20 -left-20 w-72 h-72 rounded-full bg-electric-500/20 blur-[100px]" />
-            <div className="absolute -bottom-20 -right-20 w-72 h-72 rounded-full bg-cyan-500/20 blur-[100px]" />
+          <div className="max-w-4xl mx-auto text-center">
+            <span className="editorial-label text-ochre-400">Join the Launch Cohort</span>
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight mt-4 leading-[1.08]">
+              Do not just study entrepreneurship.
+              <br />
+              <span className="text-ochre-400">Build it.</span>
+            </h2>
 
-            <div className="relative text-center">
-              <p className="text-sm font-bold uppercase tracking-wider text-cyan-400 mb-6">
-                Your journey starts here
-              </p>
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white tracking-tight leading-[1.05]">
-                Don't just study
-                <br />
-                <span className="text-gradient">entrepreneurship.</span>
-                <br />
-                <span className="text-white">Build it.</span>
-              </h2>
-              <p className="mt-8 text-lg lg:text-xl text-ink-300 max-w-2xl mx-auto leading-relaxed">
-                Join the launch cohort. Learn from 250+ founders. Build real ventures. And become
-                the entrepreneur you're meant to be.
-              </p>
+            <p className="mt-8 text-base sm:text-lg lg:text-xl text-ink-200 leading-relaxed max-w-2xl mx-auto">
+              Undergraduate (3 Years · ₹25 Lakh) and Postgraduate (2 Years · ₹30 Lakh) pathways built alongside 250+ founders.
+            </p>
 
-              <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <FormLink type="apply" className="cta-shine inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 font-semibold text-ink-950 transition-all duration-300">Apply Now</FormLink>
-                <FormLink type="enquiry" icon="external" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-white/10">Enquire</FormLink>
-              </div>
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
+              <FormLink
+                type="apply"
+                className="btn-primary px-8 py-4 bg-white text-ink-950 hover:bg-ochre-400 text-xs font-bold uppercase tracking-wider shadow-lg"
+              >
+                Apply Now
+                <ArrowUpRight className="w-4 h-4 ml-1.5" />
+              </FormLink>
+
+              <FormLink
+                type="enquiry"
+                icon="external"
+                className="btn-primary px-8 py-4 border border-white/25 text-white hover:border-white hover:bg-white/10 text-xs font-bold uppercase tracking-wider"
+              >
+                Enquire with Admissions
+              </FormLink>
             </div>
           </div>
         </Reveal>

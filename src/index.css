@@ -10,45 +10,30 @@
   }
   body {
     font-family: 'Inter', sans-serif;
-    @apply bg-white text-ink-900;
+    @apply bg-ivory-50 text-ink-900 transition-colors duration-200 dark:bg-ink-950 dark:text-ink-100;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: '"Plus Jakarta Sans"', sans-serif;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
   }
 }
 
 @layer utilities {
-  .glass {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-  }
-  .glass-light {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-  }
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-cyan-400;
-  }
-  .text-gradient-dark {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-ink-900 via-electric-600 to-cyan-500;
-  }
   .section-padding {
     @apply px-5 sm:px-8 lg:px-16 xl:px-24;
-    max-width: 1600px;
+    max-width: 1560px;
     margin-inline: auto;
     width: 100%;
   }
+
   .editorial-rule {
-    border-top: 1px solid rgba(15, 26, 46, 0.14);
+    @apply border-t border-ink-900/10 dark:border-white/10;
   }
+
   .editorial-label {
-    @apply text-[11px] font-bold uppercase tracking-[0.2em] text-electric-600;
+    @apply text-[11px] font-bold uppercase tracking-[0.22em] text-ochre-600 dark:text-ochre-400;
   }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -58,68 +43,66 @@
   }
 }
 
+/* Institutional Links & Actions */
 .nav-link {
   position: relative;
-  border-radius: 0;
-  isolation: isolate;
+  transition: color 200ms ease;
 }
-.nav-link::before {
+
+.nav-link::after {
   content: '';
   position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: 0;
-  background: linear-gradient(110deg, rgba(125, 211, 252, 0.22), rgba(30, 30, 32, 0.75));
-  opacity: 0;
-  transform: scale(0.94);
-  transition: opacity 250ms ease-out, transform 250ms ease-out;
+  bottom: -2px;
+  left: 0;
+  width: 0%;
+  height: 1.5px;
+  background-color: currentColor;
+  transition: width 240ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-.nav-link:hover::before,
-.nav-link:focus-visible::before {
-  opacity: 1;
-  transform: scale(1);
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  width: 100%;
 }
-.cta-shine {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
+
+/* Subtle button interaction */
+.btn-primary {
+  @apply inline-flex items-center justify-center font-semibold transition-all duration-200;
 }
-.cta-shine::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(105deg, transparent 25%, rgba(255, 255, 255, 0.2) 50%, transparent 75%);
-  transform: translateX(-120%);
-  transition: transform 500ms ease-out;
+.btn-primary:hover {
+  transform: translateY(-1px);
 }
-.cta-shine:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 28px rgba(15, 26, 46, 0.24);
+.btn-primary:active {
+  transform: translateY(0);
 }
-.cta-shine:hover::before { transform: translateX(120%); }
-.cta-shine:active { transform: translateY(0) scale(0.98); }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f0f4f9;
+  background: #f4efe5;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #0b111e;
 }
 ::-webkit-scrollbar-thumb {
-  background: #6b8fc0;
-  border-radius: 4px;
+  background: #c5b59b;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #2a3850;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #4a6fa5;
+  background: #9b8c73;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #3f5273;
 }
 
 /* Focus states */
 *:focus-visible {
-  outline: 2px solid #2563eb;
+  outline: 2px solid #d97706;
   outline-offset: 2px;
-  border-radius: 4px;
 }
 
 /* Reduced motion */
@@ -130,18 +113,4 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* Grain texture overlay */
-.grain {
-  position: relative;
-}
-.grain::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E");
-  opacity: 0.06;
-  pointer-events: none;
-  mix-blend-mode: overlay;
 }

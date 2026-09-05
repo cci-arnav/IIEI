@@ -1,26 +1,46 @@
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowUpRight } from 'lucide-react';
 
-export default function Logo({ variant = 'dark' }: { variant?: 'dark' | 'light' }) {
+interface LogoProps {
+  variant?: 'dark' | 'light';
+  showCciTag?: boolean;
+}
+
+export default function Logo({ variant = 'dark', showCciTag = true }: LogoProps) {
   const location = useLocation();
-  const textColor = variant === 'light' ? 'text-white' : 'text-ink-900';
-  const subColor = variant === 'light' ? 'text-blue-200' : 'text-ink-500';
+
+  const handleLogoClick = () => {
+    if (location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const isLight = variant === 'light';
+  const textColor = isLight ? 'text-white' : 'text-ink-900 dark:text-white';
+  const subColor = isLight ? 'text-ink-300' : 'text-ink-500 dark:text-ink-400';
+  const borderColor = isLight ? 'border-white/20' : 'border-ink-900/15 dark:border-white/20';
 
   return (
     <Link
       to="/"
-      onClick={() => {
-        if (location.pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' });
-      }}
-      className="flex items-center gap-3 group"
-      aria-label="IIEI Home"
+      onClick={handleLogoClick}
+      className="flex items-center gap-3.5 group text-left select-none"
+      aria-label="IIEI - Indian Institute of Entrepreneurship & Innovation Homepage"
     >
-      <div className="flex items-center gap-3">
-        <span className={`font-display text-2xl font-extrabold tracking-[-0.08em] ${textColor}`}>IIEI</span>
-        <span className={`hidden border-l pl-3 text-[10px] font-medium uppercase tracking-[0.16em] sm:block ${variant === 'light' ? 'border-white/30' : 'border-ink-200'} ${subColor}`}>
-          Entrepreneurship<br />&amp; Innovation
+      <div className="flex items-baseline gap-2">
+        <span className={`font-display text-2xl lg:text-[26px] font-black tracking-[-0.06em] transition-colors ${textColor}`}>
+          IIEI
         </span>
-        <ArrowUpRight className={`h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 ${subColor}`} />
+      </div>
+
+      <div className={`hidden sm:flex flex-col border-l pl-3 py-0.5 text-left ${borderColor}`}>
+        <span className={`text-[10.5px] font-extrabold uppercase tracking-[0.16em] leading-tight transition-colors ${textColor}`}>
+          Entrepreneurship &amp; Innovation
+        </span>
+        {showCciTag && (
+          <span className={`text-[9px] font-semibold tracking-[0.08em] uppercase mt-0.5 ${subColor}`}>
+            Initiated by CCI India
+          </span>
+        )}
       </div>
     </Link>
   );

@@ -1,106 +1,130 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Play, Sparkles } from 'lucide-react';
 import { heroStatCards, siteSettings } from '@/data/content';
 import AnimatedCounter from '@/components/AnimatedCounter';
 import FormLink from '@/components/FormLink';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 
 export default function Hero() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.matchMedia('(pointer: coarse)').matches) return;
-    const handler = (e: MouseEvent) => {
-      setMousePos({
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 20,
-      });
-    };
-    window.addEventListener('mousemove', handler);
-    return () => window.removeEventListener('mousemove', handler);
-  }, []);
-
   return (
-    <section className="relative min-h-screen bg-ink-950 overflow-hidden grain">
-      <div className="pointer-events-none absolute right-[-10%] top-[18%] h-[min(560px,55vw)] w-[min(560px,55vw)] rounded-full bg-electric-500/10 blur-[100px] transition-transform duration-1000 ease-out" style={{ transform: `translate(${mousePos.x}px, ${mousePos.y}px)` }} />
-
-      {/* Grid overlay */}
+    <section className="relative min-h-[92vh] flex flex-col justify-between bg-ink-950 text-white pt-24 pb-12 lg:pt-32 lg:pb-16 border-b border-white/10 overflow-hidden">
+      {/* Subtle architectural background texture */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.035] pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)`,
-          backgroundSize: '60px 60px',
+          backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
+          backgroundSize: '72px 72px',
         }}
       />
 
-      <div className="relative section-padding flex min-h-screen flex-col justify-center py-28 lg:py-32">
-        <div className="mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16">
-          <div className="min-w-0">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8 animate-fade-in">
-            <Sparkles className="w-4 h-4 text-cyan-400" />
-            <span className="text-sm text-ink-200 font-medium">
-              Initiated by {siteSettings.initiatedBy}
-            </span>
-          </div>
+      <div className="relative section-padding my-auto w-full">
+        {/* Institutional Accreditation / Supporting Tag */}
+        <div className="inline-flex items-center gap-3 border border-white/15 px-3.5 py-1.5 bg-white/5 mb-8">
+          <span className="w-2 h-2 bg-ochre-400" />
+          <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-ink-200">
+            Initiated by {siteSettings.initiatedBy} (CCI India)
+          </span>
+        </div>
 
-          <h1 className="font-display text-[clamp(3rem,7vw,6.5rem)] font-extrabold leading-[1.02] tracking-tight animate-slide-up">
-            <span className="text-gradient">Learn</span>
-            <br />
-            <span className="text-white">by </span>
-            <span className="relative inline-block">
-              <span className="text-gradient">Doing.</span>
-              <span className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-electric-500 to-cyan-500 rounded-full" />
-            </span>
-          </h1>
+        {/* Main Editorial Hero Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Left Column: Bold Typography & Manifesto */}
+          <div className="lg:col-span-7">
+            <h1 className="font-display text-[clamp(2.8rem,6.5vw,5.5rem)] font-black leading-[1.02] tracking-[-0.035em] text-white">
+              LEARN BY
+              <br />
+              <span className="text-ochre-400 underline decoration-ochre-500/40 decoration-4 underline-offset-8">
+                DOING.
+              </span>
+            </h1>
 
-          <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink-300 sm:text-lg lg:text-xl animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            The {siteSettings.instituteName} — a new generation entrepreneurship and innovation institution built around founder-led learning, real-world execution, and the belief that you learn by doing.
-          </p>
+            <p className="mt-8 max-w-xl font-display text-lg sm:text-xl text-ink-200 font-medium leading-relaxed">
+              An entrepreneurship and innovation education built around founders, real businesses, industry exposure, and relentless execution.
+            </p>
 
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <FormLink type="apply" className="cta-shine inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 font-semibold text-ink-950 shadow-2xl shadow-electric-500/20 transition-all duration-300">Apply Now</FormLink>
-            <Link
-              to="/programs/entrepreneurship"
-              className="inline-flex items-center justify-center gap-2 bg-white/10 text-white font-semibold px-8 py-4 rounded-full border border-white/20 backdrop-blur-md hover:bg-white/15 transition-all duration-300"
-            >
-              <Play className="w-5 h-5" fill="currentColor" />
-              Explore Program
-            </Link>
-          </div>
+            <p className="mt-4 max-w-lg text-sm sm:text-base text-ink-400 leading-relaxed">
+              Two immersive tracks: Undergraduate (3 Years · ₹25 Lakh) and Postgraduate (2 Years · ₹30 Lakh) designed to build scalable enterprises.
+            </p>
 
-          </div>
+            {/* Action Buttons */}
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <a
+                href="#programs"
+                className="btn-primary px-7 py-4 bg-white text-ink-950 hover:bg-ochre-400 hover:text-ink-950 text-xs font-bold uppercase tracking-[0.14em] transition-colors"
+              >
+                Explore Programs
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </a>
 
-          <div className="relative min-h-[22rem] overflow-hidden sm:min-h-[28rem] lg:min-h-[34rem]">
-            <img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Entrepreneurs collaborating around a table" className="absolute inset-0 h-full w-full object-cover grayscale-[10%]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink-950/75 via-transparent to-ink-950/10" />
-            <div className="absolute bottom-5 left-5 border-l-2 border-amber-300 pl-4 text-white sm:bottom-8 sm:left-8">
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-200">Founder-led learning</p>
-              <p className="mt-2 max-w-xs font-display text-xl font-bold sm:text-2xl">Ideas become work. Work becomes ventures.</p>
+              <FormLink
+                type="enquiry"
+                icon="external"
+                className="btn-primary px-7 py-4 border border-white/25 text-white hover:border-white hover:bg-white/10 text-xs font-bold uppercase tracking-[0.14em] transition-colors"
+              >
+                Enquire
+              </FormLink>
+
+              <FormLink
+                type="apply"
+                className="btn-primary px-7 py-4 bg-ochre-500 hover:bg-ochre-400 text-ink-950 text-xs font-bold uppercase tracking-[0.14em] transition-colors"
+              >
+                Apply Now
+                <ArrowUpRight className="w-4 h-4 ml-1.5" />
+              </FormLink>
             </div>
           </div>
 
-          <div className="mt-2 grid grid-cols-2 border-y border-white/15 py-5 sm:grid-cols-3 lg:col-span-2 lg:mt-8 lg:grid-cols-5 animate-fade-in" style={{ animationDelay: '0.6s' }}>
-            {heroStatCards.map((stat, i) => {
-              const numeric = parseInt(stat.value.replace(/[^0-9]/g, ''));
-              const hasPlus = stat.value.includes('+');
-              return (
-                <div key={i} className="group min-w-0 border-r border-white/10 px-4 py-1 first:pl-0 last:border-r-0 sm:px-5 lg:first:pl-0">
-                  <div className="font-display text-3xl font-extrabold text-white lg:text-4xl">
-                    {numeric > 0 ? <AnimatedCounter value={numeric} suffix={hasPlus ? '+' : ''} /> : stat.value}
-                  </div>
-                  <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-400">{stat.label}</div>
-                  <div className="mt-1 text-[11px] leading-snug text-ink-400">{stat.sublabel}</div>
+          {/* Right Column: Large Editorial Photography */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative border border-white/15 bg-ink-900 overflow-hidden shadow-2xl">
+              <div className="aspect-[4/5] sm:aspect-[1/1] lg:aspect-[4/5] w-full relative">
+                <img
+                  src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1400"
+                  alt="Students and founders collaborating on real startup ventures at IIEI"
+                  className="w-full h-full object-cover object-center filter contrast-[1.05]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/20 to-transparent" />
+
+                {/* Editorial Caption Box */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 border-t border-white/15 bg-ink-950/90 backdrop-blur-sm">
+                  <span className="editorial-label text-ochre-400 text-[10px]">
+                    Institutional Foundation
+                  </span>
+                  <p className="font-display font-bold text-white text-lg mt-1 leading-snug">
+                    Where ideas meet venture capital and operator discipline.
+                  </p>
+                  <p className="text-xs text-ink-300 mt-1">
+                    250+ active founders mentor each cohort from day zero.
+                  </p>
                 </div>
-              );
-            })}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-pulse-slow">
-        <span className="text-xs text-ink-400 tracking-wider">SCROLL</span>
-        <div className="w-px h-12 bg-gradient-to-b from-ink-400 to-transparent" />
+        {/* Institutional Statistics Band */}
+        <div className="mt-14 pt-8 border-t border-white/15 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8">
+          {heroStatCards.map((stat, i) => {
+            const numeric = parseInt(stat.value.replace(/[^0-9]/g, ''));
+            const hasPlus = stat.value.includes('+');
+            return (
+              <div key={i} className="border-l border-white/15 pl-4 sm:pl-5 first:border-l-0 lg:first:border-l">
+                <div className="font-display text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white">
+                  {numeric > 0 ? (
+                    <AnimatedCounter value={numeric} suffix={hasPlus ? '+' : ''} />
+                  ) : (
+                    stat.value
+                  )}
+                </div>
+                <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-ochre-400 mt-1">
+                  {stat.label}
+                </div>
+                <div className="text-xs text-ink-400 mt-0.5 leading-snug">
+                  {stat.sublabel}
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

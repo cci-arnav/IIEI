@@ -13,6 +13,7 @@ import Investment from '@/components/home/Investment';
 import Outcomes from '@/components/home/Outcomes';
 import Campus from '@/components/home/Campus';
 import ApplicationProcess from '@/components/home/ApplicationProcess';
+import InstitutionalIdentity from '@/components/home/InstitutionalIdentity';
 import FAQ from '@/components/home/FAQ';
 import FinalCTA from '@/components/home/FinalCTA';
 
@@ -34,6 +35,7 @@ export default function Home() {
       <Outcomes />
       <Campus />
       <ApplicationProcess />
+      <InstitutionalIdentity />
       <FAQ />
       <FinalCTA />
     </>

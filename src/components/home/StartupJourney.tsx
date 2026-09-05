@@ -3,54 +3,34 @@ import Reveal from '@/components/Reveal';
 
 export default function StartupJourney() {
   return (
-    <section className="py-24 lg:py-32 bg-white">
+    <section className="py-24 lg:py-32 bg-white dark:bg-ink-950 border-b border-ink-900/10 dark:border-white/10 transition-colors">
       <div className="section-padding">
         <Reveal>
-          <div className="max-w-3xl mb-16">
-            <p className="text-sm font-bold uppercase tracking-wider text-electric-500 mb-4">
-              The Startup Journey
-            </p>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink-900 tracking-tight">
-              From idea to growth.
-              <br />
-              <span className="text-gradient-dark">The full journey.</span>
+          <div className="max-w-3xl mb-16 border-b border-ink-900/10 dark:border-white/10 pb-8">
+            <span className="editorial-label">Venture Progression</span>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-ink-900 dark:text-white tracking-tight mt-3">
+              From Idea to Venture Scale
             </h2>
-            <p className="mt-6 text-lg text-ink-500 leading-relaxed">
-              Students don't just study startups. They build them — moving through every stage of
-              the startup journey as part of their learning.
+            <p className="mt-4 text-base sm:text-lg text-ink-600 dark:text-ink-300 leading-relaxed">
+              The eight-stage experiential pathway embedded within IIEI's undergraduate and postgraduate degrees.
             </p>
           </div>
         </Reveal>
 
-        <div className="relative">
-          {/* Horizontal line */}
-          <div className="hidden lg:block absolute top-12 left-0 right-0 h-0.5 bg-gradient-to-r from-electric-500 via-cyan-500 to-electric-500 opacity-20" />
-
-          <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 lg:grid-cols-8 lg:gap-2">
-            {startupJourney.map((stage, i) => (
-              <Reveal key={i} delay={i * 80}>
-                <div className="flex flex-col items-center text-center group">
-                  <div className="relative z-10 flex h-20 w-20 items-center justify-center rounded-full border-2 border-ink-100 bg-ink-50 transition-all duration-300 group-hover:border-electric-500 group-hover:bg-electric-50 group-hover:scale-105 sm:h-24 sm:w-24">
-                    <span className="font-display text-xl font-extrabold text-ink-300 transition-colors group-hover:text-electric-600 sm:text-2xl">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                  </div>
-                  <span className="mt-4 max-w-[8rem] break-words text-xs font-bold text-ink-700 transition-colors group-hover:text-ink-900 sm:text-sm">
-                    {stage}
-                  </span>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
+          {startupJourney.map((stage, i) => (
+            <Reveal key={i} delay={i * 60}>
+              <div className="h-full border border-ink-900/10 dark:border-white/10 p-5 bg-ivory-50 dark:bg-ink-900 flex flex-col justify-between hover:border-ink-900 dark:hover:border-white transition-colors">
+                <span className="font-display text-xl font-bold text-ink-300 dark:text-ink-700">
+                  0{i + 1}
+                </span>
+                <span className="font-display text-xs font-bold uppercase tracking-wider text-ink-900 dark:text-white mt-6">
+                  {stage}
+                </span>
+              </div>
+            </Reveal>
+          ))}
         </div>
-
-        <Reveal delay={400}>
-          <div className="mt-16 flex items-center justify-center gap-4 p-6 rounded-2xl bg-ink-50 max-w-2xl mx-auto">
-            <p className="text-sm text-ink-500 text-center">
-              Every stage is integrated into the curriculum — not as theory, but as practice.
-            </p>
-          </div>
-        </Reveal>
       </div>
     </section>
   );

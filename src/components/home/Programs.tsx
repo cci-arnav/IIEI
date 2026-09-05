@@ -1,67 +1,166 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight } from 'lucide-react';
-import { programs } from '@/data/content';
+import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { programs, degreeStructures, type DegreeLevel } from '@/data/content';
 import Reveal from '@/components/Reveal';
 
 export default function Programs() {
-  const [category, setCategory] = useState<'UG' | 'PG'>('PG');
-  const visiblePrograms = programs.filter((program) => program.category === category);
-  const flagship = visiblePrograms[0];
+  const [selectedLevel, setSelectedLevel] = useState<DegreeLevel>('UG');
+  const activeStructure = degreeStructures[selectedLevel];
 
   return (
-    <section id="programs" className="py-24 lg:py-32 bg-ink-50">
+    <section id="programs" className="py-24 lg:py-32 bg-ivory-100 dark:bg-ink-900 border-b border-ink-900/10 dark:border-white/10 transition-colors">
       <div className="section-padding">
+        {/* Section Header */}
         <Reveal>
-          <div className="max-w-4xl mb-14">
-            <p className="editorial-label mb-5">
-              Our Programs
-            </p>
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-ink-900 tracking-tight">
-              Four programs. One philosophy.
-            </h2>
-            <p className="mt-6 text-lg text-ink-500 leading-relaxed">
-              One program is launching now. Three are coming soon. Each is built around the same
-              core: founder-led learning, real-world execution, and the belief that you learn by
-              doing.
-            </p>
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14 border-b border-ink-900/15 dark:border-white/15 pb-8">
+            <div className="max-w-3xl">
+              <span className="editorial-label">Academic Programs</span>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-ink-900 dark:text-white tracking-tight mt-3">
+                Choose your path.
+              </h2>
+              <p className="mt-4 text-base sm:text-lg text-ink-600 dark:text-ink-300 leading-relaxed max-w-2xl">
+                Explore our four specialized program tracks across Undergraduate and Postgraduate levels. Each program is grounded in founder-led instruction and live market execution.
+              </p>
+            </div>
+
+            {/* UG / PG Segmented Controls */}
+            <div className="w-full lg:w-auto">
+              <span className="editorial-label block mb-2 text-ink-500 dark:text-ink-400">
+                Degree Level Filter
+              </span>
+              <div className="grid grid-cols-2 gap-3 sm:flex sm:items-center bg-white dark:bg-ink-950 p-2 border border-ink-900/20 dark:border-white/20">
+                {(['UG', 'PG'] as const).map((lvl) => {
+                  const struct = degreeStructures[lvl];
+                  const isSelected = selectedLevel === lvl;
+                  return (
+                    <button
+                      key={lvl}
+                      type="button"
+                      onClick={() => setSelectedLevel(lvl)}
+                      className={`px-5 py-3 text-left transition-colors border ${
+                        isSelected
+                          ? 'bg-ink-900 text-white dark:bg-white dark:text-ink-950 border-ink-900 dark:border-white shadow-md'
+                          : 'bg-transparent text-ink-700 dark:text-ink-300 border-transparent hover:border-ink-200 dark:hover:border-ink-800'
+                      }`}
+                    >
+                      <div className="text-xs font-black uppercase tracking-wider">
+                        {lvl === 'UG' ? 'Undergraduate' : 'Postgraduate'}
+                      </div>
+                      <div className="text-[11px] font-semibold mt-0.5 opacity-90">
+                        {struct.duration} · {struct.totalFeeLakh}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </Reveal>
 
-        <div className="mb-6 flex flex-wrap items-center gap-5 border-b border-ink-200 pb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-ink-400">
-          <span>Programmes</span>
-          {(['UG', 'PG'] as const).map((option) => <button key={option} type="button" onClick={() => setCategory(option)} className={category === option ? 'text-electric-600' : 'text-ink-400'}>{option === 'UG' ? 'Undergraduate' : 'Postgraduate'}</button>)}
-        </div>
-        {category === 'UG' && <div className="border-t-2 border-ink-900 py-8"><p className="editorial-label">Undergraduate</p><p className="mt-3 max-w-2xl text-lg leading-relaxed text-ink-500">Undergraduate programme details are not yet published. Approved programme information will appear here when available.</p></div>}
-        {flagship && <div className="grid grid-cols-1 gap-0 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
-          <Reveal>
-            <Link to={`/programs/${flagship.slug}`} className="group block border-t-2 border-ink-900 pt-5">
-                <div className="relative aspect-[16/9] overflow-hidden bg-ink-900">
-                  <img src={flagship.image} alt={flagship.name} className="h-full w-full object-cover grayscale-[20%] transition-transform duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-transparent to-transparent" />
-                  <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 text-white">
-                    <span className="editorial-label text-cyan-300">{flagship.statusLabel}</span>
-                    <ArrowUpRight className="h-6 w-6 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+        {/* Selected Degree Level Overview Banner */}
+        <Reveal delay={100}>
+          <div className="p-6 sm:p-8 bg-white dark:bg-ink-950 border border-ink-900/10 dark:border-white/10 mb-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div>
+              <div className="flex items-center gap-3">
+                <span className="font-display text-xl font-bold text-ink-900 dark:text-white">
+                  {activeStructure.title}
+                </span>
+                <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 bg-ochre-500/15 text-ochre-700 dark:text-ochre-300 border border-ochre-500/30">
+                  {activeStructure.duration} Track
+                </span>
+              </div>
+              <p className="text-sm text-ink-600 dark:text-ink-300 mt-2 max-w-2xl leading-relaxed">
+                {activeStructure.highlight}
+              </p>
+            </div>
+
+            <div className="sm:text-right border-t sm:border-t-0 sm:border-l border-ink-900/10 dark:border-white/10 pt-4 sm:pt-0 sm:pl-8 shrink-0">
+              <span className="text-xs text-ink-500 dark:text-ink-400 block font-medium uppercase tracking-wider">
+                Total Investment
+              </span>
+              <span className="font-display text-2xl sm:text-3xl font-black text-ink-900 dark:text-white block mt-0.5">
+                {activeStructure.totalFeeDisplay}
+              </span>
+              <span className="text-[11px] text-ochre-600 dark:text-ochre-400 font-semibold block mt-0.5">
+                Indicative breakdown in Fee Section
+              </span>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* 4 Program Areas Editorial Cards List */}
+        <div className="space-y-6">
+          {programs.map((program, index) => {
+            const isLaunching = program.status === 'launching';
+            return (
+              <Reveal key={program.id} delay={index * 80}>
+                <Link
+                  to={`/programs/${program.slug}`}
+                  className="group block bg-white dark:bg-ink-950 border border-ink-900/10 dark:border-white/10 hover:border-ink-900 dark:hover:border-white transition-all duration-300 p-6 sm:p-8 lg:p-10 hover:shadow-xl"
+                >
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+                    {/* Index Number & Status */}
+                    <div className="lg:col-span-1 flex lg:flex-col items-center lg:items-start justify-between">
+                      <span className="font-display text-3xl sm:text-4xl font-black text-ink-300 dark:text-ink-700 group-hover:text-ochre-600 dark:group-hover:text-ochre-400 transition-colors">
+                        {program.number}
+                      </span>
+                    </div>
+
+                    {/* Program Title & Overview */}
+                    <div className="lg:col-span-6">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span
+                          className={`text-[10px] font-extrabold uppercase tracking-[0.16em] px-2.5 py-0.5 border ${
+                            isLaunching
+                              ? 'bg-ochre-500/10 border-ochre-500/30 text-ochre-700 dark:text-ochre-300'
+                              : 'bg-ink-100 dark:bg-ink-800 border-ink-200 dark:border-ink-700 text-ink-500 dark:text-ink-400'
+                          }`}
+                        >
+                          {isLaunching ? 'Now Launching' : 'Coming Soon'}
+                        </span>
+                        <span className="text-xs text-ink-500 dark:text-ink-400 font-medium">
+                          {selectedLevel === 'UG' ? '3 Years' : '2 Years'} Duration
+                        </span>
+                      </div>
+
+                      <h3 className="font-display text-2xl sm:text-3xl font-bold text-ink-900 dark:text-white group-hover:text-ochre-600 dark:group-hover:text-ochre-400 transition-colors">
+                        {program.name}
+                      </h3>
+
+                      <p className="mt-3 text-sm text-ink-600 dark:text-ink-300 leading-relaxed line-clamp-2 max-w-xl">
+                        {program.description}
+                      </p>
+                    </div>
+
+                    {/* Pathways & Features */}
+                    <div className="lg:col-span-3 border-t lg:border-t-0 lg:border-l border-ink-900/10 dark:border-white/10 pt-4 lg:pt-0 lg:pl-8">
+                      <span className="editorial-label text-[10px] block mb-2 text-ink-500 dark:text-ink-400">
+                        Primary Career Focus
+                      </span>
+                      <ul className="space-y-1.5 text-xs text-ink-700 dark:text-ink-300">
+                        {program.careerPathways.slice(0, 3).map((path, pIdx) => (
+                          <li key={pIdx} className="flex items-center gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-ochre-600 dark:text-ochre-400 shrink-0" />
+                            <span>{path}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Arrow / Explore Action */}
+                    <div className="lg:col-span-2 flex items-center justify-end">
+                      <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-ink-900 dark:text-white group-hover:text-ochre-600 dark:group-hover:text-ochre-400 transition-colors">
+                        <span>{isLaunching ? 'Explore Program' : 'View Scope'}</span>
+                        <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="mt-5 flex gap-5">
-                  <span className="font-display text-2xl font-bold text-electric-600">{flagship.number}</span>
-                  <div><h3 className="font-display text-2xl font-bold text-ink-900 sm:text-3xl">{flagship.name}</h3><p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-500">{flagship.description}</p></div>
-                </div>
-            </Link>
-          </Reveal>
-          <div className="mt-12 lg:mt-0">
-            {visiblePrograms.slice(1).map((prog, i) => (
-              <Reveal key={prog.id} delay={(i + 1) * 80}>
-                <Link to={`/programs/${prog.slug}`} className="group editorial-rule flex items-start gap-5 py-6 first:border-t-0">
-                  <span className="font-display text-xl font-bold text-ink-300 group-hover:text-electric-600">{prog.number}</span>
-                  <span className="min-w-0 flex-1"><span className="block font-display text-lg font-bold text-ink-900">{prog.name}</span><span className="mt-2 block text-xs font-bold uppercase tracking-wider text-ink-400">{prog.statusLabel}</span></span>
-                  <ArrowUpRight className="h-5 w-5 text-ink-400 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
                 </Link>
               </Reveal>
-            ))}
-          </div>
-        </div>}
+            );
+          })}
+        </div>
       </div>
     </section>
   );

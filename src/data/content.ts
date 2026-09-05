@@ -3,10 +3,14 @@ export const siteSettings = {
   shortName: "IIEI",
   initiatedBy: "Chamber of Commerce & Industry of India",
   initiatedByShort: "CCI India",
-  duration: "2 Years",
-  semesters: 4,
-  totalProgramFee: 2500000,
-  totalProgramFeeDisplay: "₹25,00,000",
+  ugDuration: "3 Years",
+  pgDuration: "2 Years",
+  ugFee: 2500000,
+  ugFeeDisplay: "₹25,00,000",
+  ugFeeLakh: "₹25 Lakh",
+  pgFee: 3000000,
+  pgFeeDisplay: "₹30,00,000",
+  pgFeeLakh: "₹30 Lakh",
   ugSeats: 60,
   pgSeats: 60,
   totalSeats: 120,
@@ -17,12 +21,174 @@ export const siteSettings = {
   tagline: "Learn by Doing.",
 };
 
+export type DegreeLevel = "UG" | "PG";
 export type ProgramStatus = "launching" | "coming-soon";
-export type ProgramCategory = "UG" | "PG";
+
+export interface FeeItem {
+  number: string;
+  title: string;
+  amount: number;
+  amountDisplay: string;
+  lakhDisplay: string;
+  description: string;
+  percentage: number;
+}
+
+export interface DegreeStructure {
+  level: DegreeLevel;
+  title: string;
+  badgeLabel: string;
+  duration: string;
+  semesters: number;
+  totalFee: number;
+  totalFeeDisplay: string;
+  totalFeeLakh: string;
+  cohortCapacity: number;
+  highlight: string;
+  breakdown: FeeItem[];
+}
+
+export const degreeStructures: Record<DegreeLevel, DegreeStructure> = {
+  UG: {
+    level: "UG",
+    title: "Undergraduate Program",
+    badgeLabel: "3 Years · ₹25 Lakh",
+    duration: "3 Years",
+    semesters: 6,
+    totalFee: 2500000,
+    totalFeeDisplay: "₹25,00,000",
+    totalFeeLakh: "₹25 Lakh",
+    cohortCapacity: 60,
+    highlight: "Foundational venture creation, execution discipline, and multi-term industry immersion.",
+    breakdown: [
+      {
+        number: "01",
+        title: "Academic & Tuition",
+        amount: 1250000,
+        amountDisplay: "₹12,50,000",
+        lakhDisplay: "₹12.50 L",
+        description: "Core curriculum, business foundations, specialization modules and academic evaluation.",
+        percentage: 50,
+      },
+      {
+        number: "02",
+        title: "Founder-Led Learning",
+        amount: 300000,
+        amountDisplay: "₹3,00,000",
+        lakhDisplay: "₹3.00 L",
+        description: "Sessions, masterclasses and venture reviews with 250+ founders and co-founders.",
+        percentage: 12,
+      },
+      {
+        number: "03",
+        title: "Experiential Learning",
+        amount: 300000,
+        amountDisplay: "₹3,00,000",
+        lakhDisplay: "₹3.00 L",
+        description: "Live student venture challenges, problem sprints, product validation and prototyping.",
+        percentage: 12,
+      },
+      {
+        number: "04",
+        title: "Industry & Internship Experience",
+        amount: 200000,
+        amountDisplay: "₹2,00,000",
+        lakhDisplay: "₹2.00 L",
+        description: "Multiple internships and live corporate/startup project opportunities.",
+        percentage: 8,
+      },
+      {
+        number: "05",
+        title: "Innovation & Startup Ecosystem",
+        amount: 250000,
+        amountDisplay: "₹2,50,000",
+        lakhDisplay: "₹2.50 L",
+        description: "Venture incubation facilities, mentor office hours and student enterprise support.",
+        percentage: 10,
+      },
+      {
+        number: "06",
+        title: "Learning Resources & Academic Support",
+        amount: 200000,
+        amountDisplay: "₹2,00,000",
+        lakhDisplay: "₹2.00 L",
+        description: "Case materials, digital enterprise platforms, library access and academic advising.",
+        percentage: 8,
+      },
+    ],
+  },
+  PG: {
+    level: "PG",
+    title: "Postgraduate Program",
+    badgeLabel: "2 Years · ₹30 Lakh",
+    duration: "2 Years",
+    semesters: 4,
+    totalFee: 3000000,
+    totalFeeDisplay: "₹30,00,000",
+    totalFeeLakh: "₹30 Lakh",
+    cohortCapacity: 60,
+    highlight: "Advanced venture leadership, high-velocity scaling, capitalization and capstone execution.",
+    breakdown: [
+      {
+        number: "01",
+        title: "Academic & Tuition",
+        amount: 1500000,
+        amountDisplay: "₹15,00,000",
+        lakhDisplay: "₹15.00 L",
+        description: "Rigorous management disciplines, specialization courses and capstone supervision.",
+        percentage: 50,
+      },
+      {
+        number: "02",
+        title: "Founder-Led Learning",
+        amount: 350000,
+        amountDisplay: "₹3,50,000",
+        lakhDisplay: "₹3.50 L",
+        description: "Special courses, deep-dive strategy sessions and founder-in-residence mentorship.",
+        percentage: 11.67,
+      },
+      {
+        number: "03",
+        title: "Experiential Learning",
+        amount: 350000,
+        amountDisplay: "₹3,50,000",
+        lakhDisplay: "₹3.50 L",
+        description: "Venture acceleration labs, market penetration testing and investor pitch simulations.",
+        percentage: 11.67,
+      },
+      {
+        number: "04",
+        title: "Industry & Internship Experience",
+        amount: 250000,
+        amountDisplay: "₹2,50,000",
+        lakhDisplay: "₹2.50 L",
+        description: "Strategic internships across venture firms, growth-stage startups and innovation teams.",
+        percentage: 8.33,
+      },
+      {
+        number: "05",
+        title: "Innovation & Startup Ecosystem",
+        amount: 300000,
+        amountDisplay: "₹3,00,000",
+        lakhDisplay: "₹3.00 L",
+        description: "Incubation support, institutional venture backing infrastructure and investor networks.",
+        percentage: 10,
+      },
+      {
+        number: "06",
+        title: "Learning Resources & Academic Support",
+        amount: 250000,
+        amountDisplay: "₹2,50,000",
+        lakhDisplay: "₹2.50 L",
+        description: "Global research databases, enterprise software suites and executive-level resources.",
+        percentage: 8.33,
+      },
+    ],
+  },
+};
 
 export interface Program {
   id: string;
-  category: ProgramCategory;
   number: string;
   name: string;
   shortName: string;
@@ -48,9 +214,8 @@ export interface Program {
 export const programs: Program[] = [
   {
     id: "entrepreneurship",
-    category: "PG",
     number: "01",
-    name: "MBA in Entrepreneurship & Innovation",
+    name: "Entrepreneurship & Innovation",
     shortName: "Entrepreneurship & Innovation",
     slug: "entrepreneurship",
     status: "launching",
@@ -58,7 +223,7 @@ export const programs: Program[] = [
     description:
       "A practical entrepreneurship-focused program built around startup creation, innovation, business models, venture capital, incubation and real-world execution.",
     longDescription:
-      "The Entrepreneurship & Innovation program is designed for builders. Over two years and four semesters, students move from foundation to real-world execution — building startups, pitching ideas, working with founders, and learning through doing. This is not a theoretical business degree. It's a launchpad.",
+      "The Entrepreneurship & Innovation program is designed for builders. Students move from core foundations to real-world execution — building startups, testing ideas in the market, working alongside experienced founders, and learning through doing. This is not a theoretical business degree. It is a launchpad.",
     whoIsItFor:
       "Aspiring entrepreneurs, startup builders, family business successors, innovators and anyone who wants to build, not just study.",
     careerPathways: [
@@ -115,19 +280,18 @@ export const programs: Program[] = [
   },
   {
     id: "agritech",
-    category: "PG",
     number: "02",
-    name: "MBA in AgriTech Management",
+    name: "AgriTech Management",
     shortName: "AgriTech Management",
     slug: "agritech",
     status: "coming-soon",
     statusLabel: "Coming Soon",
     description:
-      "A program designed to bridge agriculture and technology, building leaders for India's agritech revolution.",
+      "A program designed to bridge agriculture and technology, building leaders for India's agritech revolution and rural innovation.",
     longDescription:
-      "The AgriTech Management program will equip students with the skills to drive innovation at the intersection of agriculture and technology. Details will be announced as the program launches.",
+      "The AgriTech Management program equips students to lead innovation at the intersection of agriculture, technology, supply chains, and rural markets. Details will be announced as the program launches.",
     whoIsItFor:
-      "Professionals and aspiring entrepreneurs passionate about agricultural technology and rural innovation.",
+      "Professionals and aspiring entrepreneurs passionate about agricultural technology, rural innovation, and sustainable farming ecosystems.",
     careerPathways: [
       "AgriTech Entrepreneur",
       "Supply Chain Manager (Agri)",
@@ -166,19 +330,18 @@ export const programs: Program[] = [
   },
   {
     id: "finance",
-    category: "PG",
     number: "03",
-    name: "MBA in Financial Management",
+    name: "Financial Management",
     shortName: "Financial Management",
     slug: "finance",
     status: "coming-soon",
     statusLabel: "Coming Soon",
     description:
-      "A finance-focused program built for the next generation of financial leaders, analysts and innovators.",
+      "A finance-focused program built for the next generation of financial leaders, venture analysts, fintech innovators and corporate strategists.",
     longDescription:
-      "The Financial Management program will prepare students for leadership roles across banking, investing, fintech and corporate finance. Details will be announced as the program launches.",
+      "The Financial Management program prepares students for leadership roles across banking, venture capital, fintech, and corporate financial architecture. Details will be announced as the program launches.",
     whoIsItFor:
-      "Aspiring financial analysts, investment professionals and fintech entrepreneurs.",
+      "Aspiring financial analysts, investment professionals, corporate finance leads, and fintech entrepreneurs.",
     careerPathways: [
       "Financial Analyst",
       "Investment Associate",
@@ -217,19 +380,18 @@ export const programs: Program[] = [
   },
   {
     id: "logistics",
-    category: "PG",
     number: "04",
-    name: "MBA in Logistics & Supply Chain Management",
+    name: "Logistics & Supply Chain Management",
     shortName: "Logistics & Supply Chain Management",
     slug: "logistics",
     status: "coming-soon",
     statusLabel: "Coming Soon",
     description:
-      "A program for the builders of India's supply chain and logistics infrastructure — the backbone of commerce.",
+      "A program for the builders of modern supply chains, fulfillment networks, and multimodal logistics infrastructure — the backbone of commerce.",
     longDescription:
-      "The Logistics & Supply Chain Management program will develop leaders for one of India's fastest-growing sectors. Details will be announced as the program launches.",
+      "The Logistics & Supply Chain Management program develops leaders for one of India's fastest-growing and mission-critical economic sectors. Details will be announced as the program launches.",
     whoIsItFor:
-      "Aspiring supply chain leaders, operations managers and logistics entrepreneurs.",
+      "Aspiring supply chain leaders, operations managers, warehousing strategists, and logistics entrepreneurs.",
     careerPathways: [
       "Supply Chain Manager",
       "Operations Lead",
@@ -267,24 +429,6 @@ export const programs: Program[] = [
     ],
   },
 ];
-
-export const commonCurriculum = {
-  semester1: [
-    "Principles of Management",
-    "Managerial Economics",
-    "Financial Accounting & Management",
-    "Business Communication",
-    "Entrepreneurship & Innovation",
-    "Business Analytics",
-  ],
-  semester2: [
-    "Marketing Management",
-    "Human Resource Management",
-    "Operations Management",
-    "Business Law & Ethics",
-    "Internship",
-  ],
-};
 
 export interface Founder {
   name: string;
@@ -372,144 +516,52 @@ export const faqs: FAQ[] = [
   {
     question: "What is IIEI?",
     answer:
-      "The Indian Institute of Entrepreneurship & Innovation (IIEI) is a new generation entrepreneurship and innovation institution initiated by the Chamber of Commerce & Industry of India (CCI India). It is built around the philosophy of Learn by Doing — founder-led learning, industry exposure, and real-world execution.",
+      "The Indian Institute of Entrepreneurship & Innovation (IIEI) is a new generation entrepreneurship institution initiated by the Chamber of Commerce & Industry of India (CCI India). Built on the core philosophy of 'Learn by Doing', IIEI combines founder-led learning, intensive industry exposure, and hands-on venture execution.",
   },
   {
     question: "What does Learn by Doing mean?",
     answer:
-      "Learn by Doing means students don't just study business concepts — they build, test, pitch, sell and lead. Through projects, internships, founder sessions and startup building, students move beyond theory into real-world execution throughout the program.",
+      "Learn by Doing means students move beyond passive classroom theory into real action. Throughout the program, students build prototypes, test markets, pitch to investors, execute projects, and engage in multiple industry internships.",
   },
   {
-    question: "How long is the program?",
+    question: "How long is the undergraduate program?",
     answer:
-      "The program is 2 years in duration, structured across 4 semesters. Two Years. Four Semesters. Built Around Doing.",
+      "The Undergraduate program is 3 Years in duration, designed to build strong operational foundations, entrepreneurial problem-solving capabilities, and execution discipline.",
   },
   {
-    question: "How many semesters are there?",
-    answer: "There are 4 semesters across the 2-year program: Foundation, Business + Internship, Specialization, and Advanced Learning + Capstone/Internship.",
-  },
-  {
-    question: "Which program is launching now?",
+    question: "How long is the postgraduate program?",
     answer:
-      "The MBA in Entrepreneurship & Innovation is currently launching. It is built around startup creation, innovation, business models, venture capital, incubation and real-world execution.",
-  },
-  {
-    question: "What programs are coming soon?",
-    answer:
-      "Three programs are coming soon: MBA in AgriTech Management, MBA in Financial Management, and MBA in Logistics & Supply Chain Management.",
-  },
-  {
-    question: "How many students are in the UG cohort?",
-    answer: "The UG cohort has 60 students.",
-  },
-  {
-    question: "How many students are in the PG cohort?",
-    answer: "The PG cohort has 60 students.",
+      "The Postgraduate program is 2 Years in duration structured across 4 semesters, focusing on high-velocity venture building, capitalization, and strategic innovation leadership.",
   },
   {
     question: "What is the program fee?",
     answer:
-      "The complete two-year program fee is ₹25,00,000 (₹25 lakh). This applies to both UG and PG cohorts.",
-  },
-  {
-    question: "Is ₹25 lakh the same for UG and PG?",
-    answer: "Yes. The total program fee of ₹25,00,000 applies to both UG and PG cohorts.",
-  },
-  {
-    question: "What does the ₹25 lakh program investment include?",
-    answer:
-      "The ₹25 lakh investment covers six components: Academic & Tuition, Founder-Led Learning, Experiential Learning, Industry & Internship Experience, Innovation & Startup Ecosystem, and Learning Resources & Academic Support. Exact rupee allocations across categories will be announced soon.",
+      "The program fee is structured by degree level: Undergraduate (3 Years) is ₹25,00,000 (₹25 Lakh), and Postgraduate (2 Years) is ₹30,00,000 (₹30 Lakh). Both include academic tuition, founder-led sessions, experiential learning, and startup ecosystem support.",
   },
   {
     question: "Does IIEI provide hostel accommodation?",
     answer:
-      "IIEI currently does not provide hostel accommodation. Students will need to make their own accommodation arrangements.",
+      "No. IIEI currently does not provide hostel accommodation or residential facilities. Students arrange their own local living arrangements.",
   },
   {
-    question: "Who teaches at IIEI?",
+    question: "How does founder-led learning work?",
     answer:
-      "IIEI's teaching ecosystem brings together startup founders, co-founders, entrepreneurs, business leaders and industry practitioners — a network of 250+ founders and co-founders.",
-  },
-  {
-    question: "What is the 250+ founder/co-founder ecosystem?",
-    answer:
-      "IIEI's teaching ecosystem includes 250+ founders and co-founders who conduct special courses, masterclasses and sessions. These are real practitioners who have built companies, not just academics.",
+      "IIEI's teaching ecosystem features 250+ founders and co-founders who deliver special courses, masterclasses, and direct advisory sessions. Students learn directly from operators who have built real companies.",
   },
   {
     question: "Are internships included?",
     answer:
-      "Yes. Multiple internships and industry projects are integrated into the program. Students gain practical exposure through internships, live projects, capstone projects and founder interaction.",
+      "Yes. Practical industry immersion is central to IIEI. Students undertake multiple internships across high-growth startups, corporate innovation groups, and venture firms.",
   },
   {
     question: "What is the PPO commitment?",
     answer:
-      "PPO is a commitment from IIEI. The career ecosystem is designed around practical experience, industry exposure and a commitment towards pre-placement opportunities.",
+      "IIEI maintains an explicit Pre-Placement Opportunity (PPO) commitment, aligning learning and practical internships directly with enterprise hiring pipelines.",
   },
   {
-    question: "How does the institutional funding commitment work?",
+    question: "Does IIEI provide institutional support for student ventures?",
     answer:
-      "IIEI is committed to supporting promising student ventures through its institutional entrepreneurship and funding ecosystem. Exact funding mechanics will be announced as they are finalized.",
-  },
-  {
-    question: "Can students build startups?",
-    answer:
-      "Absolutely. Entrepreneurship is central to the IIEI learning philosophy. Students can work through idea validation, prototyping, market testing, pitching and venture building as part of the entrepreneurial ecosystem.",
-  },
-  {
-    question: "Are university partnerships available?",
-    answer:
-      "IIEI is being built in collaboration with leading universities and industry partners. Partner announcements are coming soon.",
-  },
-  {
-    question: "What is the application process?",
-    answer:
-      "The application process has five steps: Explore the Program, Talk to an Advisor, Submit Application, Selection Process, and Join IIEI.",
-  },
-];
-
-export interface FeeCategory {
-  number: string;
-  title: string;
-  description: string;
-  amount: string;
-}
-
-export const feeCategories: FeeCategory[] = [
-  {
-    number: "01",
-    title: "Academic & Tuition",
-    description: "Core curriculum, specialization, classroom learning and assessments.",
-    amount: "₹XX,XX,XXX",
-  },
-  {
-    number: "02",
-    title: "Founder-Led Learning",
-    description: "Sessions and masterclasses with founders, co-founders and industry practitioners.",
-    amount: "₹XX,XX,XXX",
-  },
-  {
-    number: "03",
-    title: "Experiential Learning",
-    description: "Live projects, startup challenges, workshops and practical learning.",
-    amount: "₹XX,XX,XXX",
-  },
-  {
-    number: "04",
-    title: "Industry & Internship Experience",
-    description: "Internship ecosystem, industry exposure and project opportunities.",
-    amount: "₹XX,XX,XXX",
-  },
-  {
-    number: "05",
-    title: "Innovation & Startup Ecosystem",
-    description: "Startup building, mentorship and incubation-oriented support.",
-    amount: "₹XX,XX,XXX",
-  },
-  {
-    number: "06",
-    title: "Learning Resources & Academic Support",
-    description: "Course resources, technology/platforms and academic support.",
-    amount: "₹XX,XX,XXX",
+      "Yes. IIEI has an institutional funding commitment and incubation infrastructure to support high-potential student-led enterprises with seed access and mentor networks.",
   },
 ];
 
@@ -520,55 +572,55 @@ export interface StatCard {
 }
 
 export const heroStatCards: StatCard[] = [
-  { value: "2", label: "YEARS", sublabel: "Immersive Program" },
-  { value: "4", label: "SEMESTERS", sublabel: "Learn → Build → Specialize → Launch" },
-  { value: "120", label: "STUDENTS", sublabel: "UG + PG Launch Cohort Capacity" },
-  { value: "250+", label: "FOUNDERS", sublabel: "Founder & Co-Founder Teaching Ecosystem" },
-  { value: "MULTIPLE", label: "INTERNSHIPS", sublabel: "Internships & Industry Projects" },
+  { value: "3", label: "YEARS UG", sublabel: "Undergraduate Track" },
+  { value: "2", label: "YEARS PG", sublabel: "Postgraduate Track" },
+  { value: "120", label: "COHORT", sublabel: "60 UG + 60 PG Seats" },
+  { value: "250+", label: "FOUNDERS", sublabel: "Teaching & Mentor Ecosystem" },
+  { value: "MULTIPLE", label: "INTERNSHIPS", sublabel: "Integrated Industry Experience" },
 ];
 
 export const whyIIEICards = [
   {
     title: "Founder-Led Learning",
     description:
-      "Learn from startup founders, co-founders, entrepreneurs and experienced industry practitioners.",
+      "Learn directly from 250+ startup founders, co-founders, and industry practitioners with active execution experience.",
     icon: "Users",
   },
   {
     title: "Real-World Execution",
     description:
-      "Move beyond classroom theory through projects, internships and practical experiences.",
+      "Move beyond abstract classroom case studies into live enterprise projects, market tests, and tangible deliverables.",
     icon: "Rocket",
   },
   {
     title: "Build While You Learn",
     description:
-      "Students work on ideas, challenges and entrepreneurial opportunities throughout the program.",
+      "Validate concepts, build products, and develop commercial traction alongside structured academic terms.",
     icon: "Hammer",
   },
   {
-    title: "Industry Exposure",
+    title: "Industry Immersion",
     description:
-      "Connect learning with real business environments and industry projects.",
+      "Multiple structured internships and corporate innovation challenges deeply integrated into every semester.",
     icon: "Building2",
   },
   {
-    title: "Entrepreneurial Ecosystem",
+    title: "Institutional Venture Backing",
     description:
-      "Develop within a network connecting students, founders, businesses and institutions.",
-    icon: "Network",
+      "IIEI provides an institutional funding commitment and incubation pathway for promising student-founded businesses.",
+    icon: "TrendingUp",
   },
   {
-    title: "Institutional Funding Commitment",
+    title: "PPO Commitment",
     description:
-      "IIEI provides an institutional commitment towards supporting promising student ventures.",
-    icon: "TrendingUp",
+      "A career ecosystem committed towards pre-placement opportunities through high-performance industry placement tracks.",
+    icon: "Network",
   },
 ];
 
 export const learnByDoingWords = ["LEARN", "BUILD", "TEST", "PITCH", "LAUNCH", "GROW"];
 
-export const bigIdeaWords = ["BUILD.", "TEST.", "FAIL.", "ITERATE.", "PITCH.", "SELL.", "LEAD."];
+export const bigIdeaWords = ["BUILD.", "TEST.", "ITERATE.", "PITCH.", "SELL.", "LEAD."];
 
 export const startupJourney = [
   "IDEA",
@@ -582,29 +634,64 @@ export const startupJourney = [
 ];
 
 export const industryCards = [
-  "Startup",
-  "Corporate",
-  "Technology",
-  "Finance",
+  "Startup Ecosystem",
+  "Venture Capital",
+  "Technology & AI",
+  "FinTech & Banking",
   "AgriTech",
-  "Logistics",
-  "Innovation",
+  "Logistics & Supply Chain",
+  "Consumer & Commerce",
 ];
 
 export const applicationSteps = [
-  { number: "01", title: "Explore the Program", description: "Understand what IIEI offers and whether it fits your ambitions." },
-  { number: "02", title: "Talk to an Advisor", description: "Have a conversation with our admissions team to get your questions answered." },
-  { number: "03", title: "Submit Application", description: "Complete your application with your details and academic background." },
-  { number: "04", title: "Selection Process", description: "Our team reviews your application and conducts the selection process." },
-  { number: "05", title: "Join IIEI", description: "Begin your journey at the Indian Institute of Entrepreneurship & Innovation." },
+  {
+    number: "01",
+    title: "Explore Programs",
+    description: "Understand the UG (3 Years) or PG (2 Years) curriculum, specializations, and execution framework.",
+  },
+  {
+    number: "02",
+    title: "Connect with Admissions",
+    description: "Engage with our admissions advisors for guidance on eligibility and cohort fit.",
+  },
+  {
+    number: "03",
+    title: "Submit Official Application",
+    description: "Fill out the official IIEI admissions form with academic background and entrepreneurial intent.",
+  },
+  {
+    number: "04",
+    title: "Selection & Evaluation",
+    description: "Participate in the candidate review and entrepreneurial aptitude assessment.",
+  },
+  {
+    number: "05",
+    title: "Cohort Induction",
+    description: "Join the launch cohort at the Indian Institute of Entrepreneurship & Innovation.",
+  },
 ];
 
 export const campusCategories = [
-  { title: "Learning Spaces", image: "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800" },
-  { title: "Founder Sessions", image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800" },
-  { title: "Startup Labs", image: "https://images.pexels.com/photos/3184432/pexels-photo-3184432.jpeg?auto=compress&cs=tinysrgb&w=800" },
-  { title: "Industry Interaction", image: "https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=800" },
-  { title: "Student Experience", image: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800" },
+  {
+    title: "Collaborative Workspaces",
+    image: "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800",
+  },
+  {
+    title: "Founder Masterclasses",
+    image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
+  },
+  {
+    title: "Venture Incubation Studio",
+    image: "https://images.pexels.com/photos/3184432/pexels-photo-3184432.jpeg?auto=compress&cs=tinysrgb&w=800",
+  },
+  {
+    title: "Industry Immersion",
+    image: "https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=800",
+  },
+  {
+    title: "Student Cohort",
+    image: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800",
+  },
 ];
 
 export interface Testimonial {
@@ -614,34 +701,14 @@ export interface Testimonial {
   quote: string;
 }
 
-export const testimonials: Testimonial[] = [
-  {
-    name: "Student Name",
-    program: "Entrepreneurship & Innovation",
-    batch: "Launch Cohort",
-    quote:
-      "[Development Placeholder] My experience at IIEI has been transformative. The founder-led sessions and real-world projects gave me the confidence to build.",
-  },
-  {
-    name: "Student Name",
-    program: "Entrepreneurship & Innovation",
-    batch: "Launch Cohort",
-    quote:
-      "[Development Placeholder] IIEI isn't like any other institution. You don't just learn — you do. The internships and industry exposure are incredible.",
-  },
-  {
-    name: "Student Name",
-    program: "Entrepreneurship & Innovation",
-    batch: "Launch Cohort",
-    quote:
-      "[Development Placeholder] The Learn by Doing philosophy is real. I came in with an idea and I'm leaving with a venture. The support system is unmatched.",
-  },
-];
+// Kept in data architecture for future cohorts but not rendered on public live homepage
+export const testimonials: Testimonial[] = [];
 
 export const navLinks = [
-  { label: "Programs", href: "/programs/entrepreneurship", hasMegaMenu: true },
+  { label: "Programs", href: "/#programs", hasMegaMenu: true },
   { label: "Why IIEI", href: "/#why-iiei" },
   { label: "Learn by Doing", href: "/#learn-by-doing" },
+  { label: "Fee Structure", href: "/#investment" },
   { label: "Faculty", href: "/faculty" },
   { label: "Industry", href: "/industry" },
   { label: "Outcomes", href: "/outcomes" },
