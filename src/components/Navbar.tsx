@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import Logo from "./Logo";
+import FormLink from "./FormLink";
 import { navLinks, programs } from "@/data/content";
 
 export default function Navbar() {
@@ -9,6 +10,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
+  const [programCategory, setProgramCategory] = useState<'UG' | 'PG'>('PG');
   const [mobileProgramsOpen, setMobileProgramsOpen] = useState(false);
   const location = useLocation();
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -71,7 +73,11 @@ export default function Navbar() {
                   </button>
                   <div className={`absolute left-0 top-full z-50 w-[min(640px,calc(100vw-2rem))] pt-3 transition-all duration-300 ${megaOpen ? "visible translate-y-0 opacity-100" : "invisible -translate-y-1 pointer-events-none opacity-0"}`}>
                     <div className="grid grid-cols-2 gap-2 border border-ink-100 bg-white p-3 shadow-2xl shadow-ink-900/15">
-                      {programs.map((prog) => (
+                      <div className="col-span-2 flex gap-4 border-b border-ink-200 px-4 pb-2 text-[10px] font-bold uppercase tracking-[0.2em]">
+                        {(['UG', 'PG'] as const).map((category) => <button key={category} type="button" onClick={() => setProgramCategory(category)} className={programCategory === category ? 'text-electric-600' : 'text-ink-400'}>{category === 'UG' ? 'Undergraduate' : 'Postgraduate'}</button>)}
+                      </div>
+                      {programCategory === 'UG' && <p className="col-span-2 px-4 py-5 text-sm leading-relaxed text-ink-500">Undergraduate programme details will be published when approved.</p>}
+                      {programs.filter((program) => program.category === programCategory).map((prog) => (
                         <Link key={prog.id} to={`/programs/${prog.slug}`} className="group border-b border-ink-100 p-4 transition-colors last:border-0 hover:bg-ink-50">
                           <div className="flex items-start gap-3">
                             <span className="mt-0.5 text-xs font-bold text-electric-500">{prog.number}</span>
@@ -131,12 +137,16 @@ export default function Navbar() {
                   <div
                     className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 w-[min(640px,calc(100vw-2rem))] transition-all duration-300 ${megaOpen ? "visible opacity-100 translate-y-0" : "invisible opacity-0 -translate-y-1 pointer-events-none"}`}
                   >
-                    <div className="bg-white rounded-2xl shadow-2xl shadow-ink-900/15 border border-ink-100 p-3 grid grid-cols-2 gap-2">
-                      {programs.map((prog) => (
+                    <div className="grid grid-cols-2 gap-2 border border-ink-100 bg-white p-3 shadow-2xl shadow-ink-900/15">
+                      <div className="col-span-2 flex gap-4 border-b border-ink-200 px-4 pb-2 text-[10px] font-bold uppercase tracking-[0.2em]">
+                        {(['UG', 'PG'] as const).map((category) => <button key={category} type="button" onClick={() => setProgramCategory(category)} className={programCategory === category ? 'text-electric-600' : 'text-ink-400'}>{category === 'UG' ? 'Undergraduate' : 'Postgraduate'}</button>)}
+                      </div>
+                      {programCategory === 'UG' && <p className="col-span-2 px-4 py-5 text-sm leading-relaxed text-ink-500">Undergraduate programme details will be published when approved.</p>}
+                      {programs.filter((program) => program.category === programCategory).map((prog) => (
                         <Link
                           key={prog.id}
                           to={`/programs/${prog.slug}`}
-                          className="group p-4 rounded-xl hover:bg-ink-50 transition-colors"
+                          className="group border-b border-ink-100 p-4 transition-colors hover:bg-ink-50"
                         >
                           <div className="flex items-start gap-3">
                             <span className="text-xs font-bold text-electric-500 mt-0.5">
@@ -181,19 +191,8 @@ export default function Navbar() {
           </div>
 
           <div className="hidden lg:flex shrink-0 items-center gap-2">
-            <Link
-              to="/contact"
-              className={`nav-link whitespace-nowrap px-3 py-2 text-[13px] font-medium transition-colors ${scrolled ? "text-ink-700" : "text-white/85"}`}
-            >
-              Talk to Advisor
-            </Link>
-            <Link
-              to="/apply"
-              className="cta-shine inline-flex shrink-0 items-center gap-2 rounded-full bg-ink-900 px-5 py-3 text-[13px] font-semibold text-white shadow-lg shadow-ink-900/20 transition-all duration-300"
-            >
-              Apply Now
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            <FormLink type="enquiry" icon="external" className={`nav-link whitespace-nowrap px-3 py-2 text-[13px] font-medium transition-colors ${scrolled ? "text-ink-700" : "text-white/85"}`}>Enquire</FormLink>
+            <FormLink type="apply" className="cta-shine inline-flex shrink-0 items-center gap-2 rounded-full bg-ink-900 px-5 py-3 text-[13px] font-semibold text-white shadow-lg shadow-ink-900/20 transition-all duration-300">Apply Now</FormLink>
           </div>
 
           <button
@@ -239,7 +238,11 @@ export default function Navbar() {
                     className={`grid transition-[grid-template-rows] duration-300 ${mobileProgramsOpen ? "grid-rows-[1fr] pb-2" : "grid-rows-[0fr]"}`}
                   >
                     <div className="overflow-hidden">
-                      {programs.map((prog) => (
+                      <div className="mb-2 flex gap-4 border-b border-ink-200 pb-2 text-[10px] font-bold uppercase tracking-[0.2em]">
+                        {(['UG', 'PG'] as const).map((category) => <button key={category} type="button" onClick={() => setProgramCategory(category)} className={programCategory === category ? 'text-electric-600' : 'text-ink-400'}>{category === 'UG' ? 'Undergraduate' : 'Postgraduate'}</button>)}
+                      </div>
+                      {programCategory === 'UG' && <p className="pb-3 text-sm leading-relaxed text-ink-500">Undergraduate programme details will be published when approved.</p>}
+                      {programs.filter((program) => program.category === programCategory).map((prog) => (
                         <Link
                           key={prog.id}
                           to={`/programs/${prog.slug}`}
@@ -272,18 +275,8 @@ export default function Navbar() {
               ),
             )}
             <div className="flex flex-col gap-3 mt-6">
-              <Link
-                to="/contact"
-                className="text-center py-3 text-sm font-semibold text-ink-900 border-2 border-ink-200 rounded-full"
-              >
-                Talk to Advisor
-              </Link>
-              <Link
-                to="/apply"
-                className="text-center py-3 text-sm font-semibold text-white bg-ink-900 rounded-full"
-              >
-                Apply Now
-              </Link>
+                <FormLink type="enquiry" icon="external" className="flex items-center justify-center gap-2 rounded-full border-2 border-ink-200 py-3 text-center text-sm font-semibold text-ink-900">Enquire</FormLink>
+                <FormLink type="apply" className="flex items-center justify-center gap-2 rounded-full bg-ink-900 py-3 text-center text-sm font-semibold text-white">Apply Now</FormLink>
             </div>
           </div>
         </div>

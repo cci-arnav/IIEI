@@ -35,8 +35,13 @@ export default {
         'fade-in': 'fadeIn 0.8s ease-out forwards',
         'slide-up': 'slideUp 0.8s ease-out forwards',
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        preloader: 'preloader 900ms ease-out forwards',
       },
       keyframes: {
+        preloader: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(300%)' },
+        },
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },

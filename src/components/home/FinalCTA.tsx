@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import FormLink from '@/components/FormLink';
 import Reveal from '@/components/Reveal';
 
 export default function FinalCTA() {
@@ -29,19 +28,8 @@ export default function FinalCTA() {
               </p>
 
               <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link
-                  to="/apply"
-                  className="inline-flex items-center justify-center gap-2 bg-white text-ink-950 font-semibold px-8 py-4 rounded-full hover:scale-[1.02] transition-all duration-300 shadow-2xl shadow-electric-500/20"
-                >
-                  Apply Now
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-white/10 text-white font-semibold px-8 py-4 rounded-full border border-white/20 backdrop-blur-md hover:bg-white/15 transition-all duration-300"
-                >
-                  Talk to an Advisor
-                </Link>
+                <FormLink type="apply" className="cta-shine inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 font-semibold text-ink-950 transition-all duration-300">Apply Now</FormLink>
+                <FormLink type="enquiry" icon="external" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-white/10">Enquire</FormLink>
               </div>
             </div>
           </div>

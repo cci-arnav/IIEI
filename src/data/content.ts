@@ -18,9 +18,11 @@ export const siteSettings = {
 };
 
 export type ProgramStatus = "launching" | "coming-soon";
+export type ProgramCategory = "UG" | "PG";
 
 export interface Program {
   id: string;
+  category: ProgramCategory;
   number: string;
   name: string;
   shortName: string;
@@ -46,6 +48,7 @@ export interface Program {
 export const programs: Program[] = [
   {
     id: "entrepreneurship",
+    category: "PG",
     number: "01",
     name: "MBA in Entrepreneurship & Innovation",
     shortName: "Entrepreneurship & Innovation",
@@ -112,6 +115,7 @@ export const programs: Program[] = [
   },
   {
     id: "agritech",
+    category: "PG",
     number: "02",
     name: "MBA in AgriTech Management",
     shortName: "AgriTech Management",
@@ -162,6 +166,7 @@ export const programs: Program[] = [
   },
   {
     id: "finance",
+    category: "PG",
     number: "03",
     name: "MBA in Financial Management",
     shortName: "Financial Management",
@@ -212,6 +217,7 @@ export const programs: Program[] = [
   },
   {
     id: "logistics",
+    category: "PG",
     number: "04",
     name: "MBA in Logistics & Supply Chain Management",
     shortName: "Logistics & Supply Chain Management",

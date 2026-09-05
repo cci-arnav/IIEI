@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { founders, facultyFilters } from '@/data/content';
 import Reveal from '@/components/Reveal';
-import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import FormLink from '@/components/FormLink';
 
 export default function Faculty() {
   const [filter, setFilter] = useState('All');
@@ -86,13 +85,7 @@ export default function Faculty() {
           <p className="mt-6 text-lg text-ink-500 max-w-2xl mx-auto">
             Masterclasses, founder sessions and special courses — all led by practitioners.
           </p>
-          <Link
-            to="/apply"
-            className="mt-10 inline-flex items-center gap-2 bg-ink-900 text-white font-semibold px-8 py-4 rounded-full hover:bg-ink-800 transition-all duration-300 hover:scale-[1.02]"
-          >
-            Apply Now
-            <ArrowRight className="w-5 h-5" />
-          </Link>
+          <FormLink type="apply" className="cta-shine mt-10 inline-flex items-center gap-2 rounded-full bg-ink-900 px-8 py-4 font-semibold text-white transition-all duration-300">Apply Now</FormLink>
         </div>
       </section>
     </>

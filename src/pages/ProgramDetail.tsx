@@ -1,12 +1,14 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { ArrowRight, ArrowLeft, CheckCircle2, Users, Briefcase, Building2, Lightbulb } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowLeft, CheckCircle2, Users, Briefcase, Building2, Lightbulb } from 'lucide-react';
 import { programs } from '@/data/content';
 import Reveal from '@/components/Reveal';
-import ButtonLink from '@/components/ButtonLink';
+import FormLink from '@/components/FormLink';
 
 export default function ProgramDetail() {
   const { slug } = useParams<{ slug: string }>();
   const program = programs.find((p) => p.slug === slug);
+  const [pathway, setPathway] = useState<'UG' | 'PG'>('PG');
 
   if (!program) return <Navigate to="/" replace />;
 
@@ -29,7 +31,7 @@ export default function ProgramDetail() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="flex items-center gap-3 mb-6">
+              <div className="mb-6 flex items-center gap-3">
                 <span className="font-display text-sm font-bold text-ink-500">{program.number}</span>
                 {isLaunching ? (
                   <span className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-300">
@@ -41,6 +43,14 @@ export default function ProgramDetail() {
                   </span>
                 )}
               </div>
+              <div className="mb-7 flex border-b border-white/20">
+                {(['UG', 'PG'] as const).map((option) => (
+                  <button key={option} type="button" onClick={() => setPathway(option)} className={`border-b-2 px-4 py-3 text-xs font-bold uppercase tracking-[0.18em] transition-colors first:pl-0 ${pathway === option ? 'border-cyan-300 text-cyan-300' : 'border-transparent text-ink-400 hover:text-white'}`}>
+                    {option === 'UG' ? 'Undergraduate' : 'Postgraduate'}
+                  </button>
+                ))}
+              </div>
+              {pathway === 'UG' && <p className="mb-6 border-l-2 border-amber-300 pl-4 text-sm leading-relaxed text-amber-100">Undergraduate programme details are not yet published. This selector will use the approved IIEI programme information when it is available.</p>}
               <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.05]">
                 {program.name}
               </h1>
@@ -48,14 +58,8 @@ export default function ProgramDetail() {
                 {program.longDescription}
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                {isLaunching && (
-                  <ButtonLink to="/apply" variant="primary" size="lg" icon={ArrowRight}>
-                    Apply Now
-                  </ButtonLink>
-                )}
-                <ButtonLink to="/contact" variant="light" size="lg">
-                  Talk to an Advisor
-                </ButtonLink>
+                {isLaunching && <FormLink type="apply" className="cta-shine inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 font-semibold text-ink-950 transition-all duration-300">Apply Now</FormLink>}
+                <FormLink type="enquiry" icon="external" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-white/10">Enquire</FormLink>
               </div>
             </div>
 
@@ -187,14 +191,8 @@ export default function ProgramDetail() {
               : 'This program is coming soon. Talk to us to learn more.'}
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            {isLaunching && (
-              <ButtonLink to="/apply" variant="primary" size="lg" icon={ArrowRight}>
-                Apply Now
-              </ButtonLink>
-            )}
-            <ButtonLink to="/contact" variant="light" size="lg">
-              Talk to an Advisor
-            </ButtonLink>
+            {isLaunching && <FormLink type="apply" className="cta-shine inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 font-semibold text-ink-950 transition-all duration-300">Apply Now</FormLink>}
+            <FormLink type="enquiry" icon="external" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-white/10">Enquire</FormLink>
           </div>
         </div>
       </section>

@@ -1,9 +1,14 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { programs } from '@/data/content';
 import Reveal from '@/components/Reveal';
 
 export default function Programs() {
+  const [category, setCategory] = useState<'UG' | 'PG'>('PG');
+  const visiblePrograms = programs.filter((program) => program.category === category);
+  const flagship = visiblePrograms[0];
+
   return (
     <section id="programs" className="py-24 lg:py-32 bg-ink-50">
       <div className="section-padding">
@@ -23,11 +28,14 @@ export default function Programs() {
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-0 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
+        <div className="mb-6 flex flex-wrap items-center gap-5 border-b border-ink-200 pb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-ink-400">
+          <span>Programmes</span>
+          {(['UG', 'PG'] as const).map((option) => <button key={option} type="button" onClick={() => setCategory(option)} className={category === option ? 'text-electric-600' : 'text-ink-400'}>{option === 'UG' ? 'Undergraduate' : 'Postgraduate'}</button>)}
+        </div>
+        {category === 'UG' && <div className="border-t-2 border-ink-900 py-8"><p className="editorial-label">Undergraduate</p><p className="mt-3 max-w-2xl text-lg leading-relaxed text-ink-500">Undergraduate programme details are not yet published. Approved programme information will appear here when available.</p></div>}
+        {flagship && <div className="grid grid-cols-1 gap-0 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
           <Reveal>
-            {(() => {
-              const flagship = programs[0];
-              return <Link to={`/programs/${flagship.slug}`} className="group block border-t-2 border-ink-900 pt-5">
+            <Link to={`/programs/${flagship.slug}`} className="group block border-t-2 border-ink-900 pt-5">
                 <div className="relative aspect-[16/9] overflow-hidden bg-ink-900">
                   <img src={flagship.image} alt={flagship.name} className="h-full w-full object-cover grayscale-[20%] transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-transparent to-transparent" />
@@ -40,11 +48,10 @@ export default function Programs() {
                   <span className="font-display text-2xl font-bold text-electric-600">{flagship.number}</span>
                   <div><h3 className="font-display text-2xl font-bold text-ink-900 sm:text-3xl">{flagship.name}</h3><p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-500">{flagship.description}</p></div>
                 </div>
-              </Link>;
-            })()}
+            </Link>
           </Reveal>
           <div className="mt-12 lg:mt-0">
-            {programs.slice(1).map((prog, i) => (
+            {visiblePrograms.slice(1).map((prog, i) => (
               <Reveal key={prog.id} delay={(i + 1) * 80}>
                 <Link to={`/programs/${prog.slug}`} className="group editorial-rule flex items-start gap-5 py-6 first:border-t-0">
                   <span className="font-display text-xl font-bold text-ink-300 group-hover:text-electric-600">{prog.number}</span>
@@ -54,7 +61,7 @@ export default function Programs() {
               </Reveal>
             ))}
           </div>
-        </div>
+        </div>}
       </div>
     </section>
   );

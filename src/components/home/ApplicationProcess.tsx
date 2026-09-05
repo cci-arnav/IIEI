@@ -1,7 +1,6 @@
 import { applicationSteps } from '@/data/content';
 import Reveal from '@/components/Reveal';
-import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import FormLink from '@/components/FormLink';
 
 export default function ApplicationProcess() {
   return (
@@ -42,13 +41,7 @@ export default function ApplicationProcess() {
 
         <Reveal delay={500}>
           <div className="mt-16 text-center">
-            <Link
-              to="/apply"
-              className="inline-flex items-center gap-2 bg-ink-900 text-white font-semibold px-8 py-4 rounded-full hover:bg-ink-800 transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-ink-900/20"
-            >
-              Start Your Application
-              <ArrowRight className="w-5 h-5" />
-            </Link>
+            <FormLink type="apply" className="cta-shine inline-flex items-center gap-2 rounded-full bg-ink-900 px-8 py-4 font-semibold text-white transition-all duration-300">Start Your Application</FormLink>
           </div>
         </Reveal>
       </div>

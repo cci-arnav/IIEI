@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Linkedin, Twitter, Instagram, Youtube, ArrowUpRight } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Twitter, Instagram, Youtube } from 'lucide-react';
 import Logo from './Logo';
+import FormLink from './FormLink';
 import { siteSettings, programs } from '@/data/content';
 
 export default function Footer() {
@@ -74,13 +75,7 @@ export default function Footer() {
                 <span className="text-sm text-ink-300">India</span>
               </li>
             </ul>
-            <Link
-              to="/apply"
-              className="inline-flex items-center gap-2 mt-6 border-b border-white/30 pb-2 text-sm font-semibold text-white transition-colors duration-300 hover:border-cyan-300 hover:text-cyan-300"
-            >
-              Apply Now
-              <ArrowUpRight className="w-4 h-4" />
-            </Link>
+            <FormLink type="apply" className="mt-6 inline-flex items-center gap-2 border-b border-white/30 pb-2 text-sm font-semibold text-white transition-colors duration-300 hover:border-cyan-300 hover:text-cyan-300">Apply Now</FormLink>
           </div>
         </div>
 

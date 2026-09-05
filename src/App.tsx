@@ -11,6 +11,7 @@ import Outcomes from '@/pages/Outcomes';
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
 import Apply from '@/pages/Apply';
+import Preloader from '@/components/Preloader';
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -27,6 +28,7 @@ function ScrollToTop() {
 function App() {
   return (
     <BrowserRouter>
+      <Preloader />
       <ScrollToTop />
       <div className="min-h-screen flex flex-col">
         <Navbar />

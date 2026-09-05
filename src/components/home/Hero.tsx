@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Play, Sparkles } from 'lucide-react';
+import { Play, Sparkles } from 'lucide-react';
 import { heroStatCards, siteSettings } from '@/data/content';
 import AnimatedCounter from '@/components/AnimatedCounter';
-import HeroVisual from './HeroVisual';
+import FormLink from '@/components/FormLink';
 
 export default function Hero() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -22,15 +22,7 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen bg-ink-950 overflow-hidden grain">
-      {/* Animated gradient orbs */}
-      <div
-        className="pointer-events-none absolute top-1/4 left-1/4 h-[min(600px,70vw)] w-[min(600px,70vw)] rounded-full bg-electric-500 opacity-20 blur-[120px] transition-transform duration-1000 ease-out"
-        style={{ transform: `translate(${mousePos.x}px, ${mousePos.y}px)` }}
-      />
-      <div
-        className="pointer-events-none absolute bottom-1/4 right-1/4 h-[min(500px,60vw)] w-[min(500px,60vw)] rounded-full bg-cyan-500 opacity-15 blur-[120px] transition-transform duration-1000 ease-out"
-        style={{ transform: `translate(${-mousePos.x}px, ${-mousePos.y}px)` }}
-      />
+      <div className="pointer-events-none absolute right-[-10%] top-[18%] h-[min(560px,55vw)] w-[min(560px,55vw)] rounded-full bg-electric-500/10 blur-[100px] transition-transform duration-1000 ease-out" style={{ transform: `translate(${mousePos.x}px, ${mousePos.y}px)` }} />
 
       {/* Grid overlay */}
       <div
@@ -42,7 +34,7 @@ export default function Hero() {
       />
 
       <div className="relative section-padding flex min-h-screen flex-col justify-center py-28 lg:py-32">
-        <div className="mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
+        <div className="mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16">
           <div className="min-w-0">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8 animate-fade-in">
             <Sparkles className="w-4 h-4 text-cyan-400" />
@@ -66,13 +58,7 @@ export default function Hero() {
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <Link
-              to="/apply"
-              className="inline-flex items-center justify-center gap-2 bg-white text-ink-950 font-semibold px-8 py-4 rounded-full hover:scale-[1.02] transition-all duration-300 shadow-2xl shadow-electric-500/20"
-            >
-              Apply Now
-              <ArrowRight className="w-5 h-5" />
-            </Link>
+            <FormLink type="apply" className="cta-shine inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 font-semibold text-ink-950 shadow-2xl shadow-electric-500/20 transition-all duration-300">Apply Now</FormLink>
             <Link
               to="/programs/entrepreneurship"
               className="inline-flex items-center justify-center gap-2 bg-white/10 text-white font-semibold px-8 py-4 rounded-full border border-white/20 backdrop-blur-md hover:bg-white/15 transition-all duration-300"
@@ -84,11 +70,13 @@ export default function Hero() {
 
           </div>
 
-          <div className="hidden lg:block">
-            <HeroVisual />
-          </div>
-          <div className="lg:hidden">
-            <HeroVisual />
+          <div className="relative min-h-[22rem] overflow-hidden sm:min-h-[28rem] lg:min-h-[34rem]">
+            <img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Entrepreneurs collaborating around a table" className="absolute inset-0 h-full w-full object-cover grayscale-[10%]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink-950/75 via-transparent to-ink-950/10" />
+            <div className="absolute bottom-5 left-5 border-l-2 border-amber-300 pl-4 text-white sm:bottom-8 sm:left-8">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-200">Founder-led learning</p>
+              <p className="mt-2 max-w-xs font-display text-xl font-bold sm:text-2xl">Ideas become work. Work becomes ventures.</p>
+            </div>
           </div>
 
           <div className="mt-2 grid grid-cols-2 border-y border-white/15 py-5 sm:grid-cols-3 lg:col-span-2 lg:mt-8 lg:grid-cols-5 animate-fade-in" style={{ animationDelay: '0.6s' }}>

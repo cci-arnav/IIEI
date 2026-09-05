@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { type LucideIcon } from 'lucide-react';
+import { getGoogleFormUrl, hasGoogleForm } from '@/config/forms';
 
 interface ButtonLinkProps {
   to: string;
@@ -37,6 +38,14 @@ export default function ButtonLink({
   icon: Icon,
   iconPosition = 'right',
 }: ButtonLinkProps) {
+  if (to === '/apply' || to === '/contact') {
+    const formType = to === '/apply' ? 'apply' : 'enquiry';
+    const url = getGoogleFormUrl(formType);
+    const content = <>{Icon && iconPosition === 'left' && <Icon className="h-4 w-4" />}{children}{Icon && iconPosition === 'right' && <Icon className="h-4 w-4" />}</>;
+    const classes = `inline-flex items-center justify-center gap-2 font-semibold rounded-full transition-all duration-300 active:scale-[0.98] ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
+    return hasGoogleForm(formType) ? <a href={url} target="_blank" rel="noopener noreferrer" className={classes}>{content}</a> : <span className={`${classes} cursor-not-allowed opacity-70`} title="Form link pending configuration">{content}</span>;
+  }
+
   return (
     <Link
       to={to}

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, type FormEvent } from 'react';
 import { MessageCircle, X, Send, Bot, User, Sparkles } from 'lucide-react';
-import { faqs, siteSettings } from '@/data/content';
+import { faqs, programs, siteSettings } from '@/data/content';
 
 interface Message {
   role: 'bot' | 'user';
@@ -18,6 +18,19 @@ const quickQuestions = [
 
 function findAnswer(question: string): string {
   const lower = question.toLowerCase();
+  if (/^(hi|hello|hey| namaste)\b/.test(lower.trim())) {
+    return 'Hello! Welcome to IIEI. How can I help you today?';
+  }
+  if (lower.includes('what is iiei') || lower.includes('about iiei')) {
+    return `${siteSettings.instituteName} is a founder-led entrepreneurship and innovation institution initiated by ${siteSettings.initiatedByShort}. Its learning philosophy is ${siteSettings.tagline.toLowerCase()}`;
+  }
+  if (lower.includes('fee') || lower.includes('cost')) return `The total programme fee is ${siteSettings.totalProgramFeeDisplay} for ${siteSettings.duration.toLowerCase()}.`;
+  if (lower.includes('hostel') || lower.includes('accommodation')) return 'IIEI does not currently provide hostel accommodation.';
+  if (lower.includes('semester') || lower.includes('how long') || lower.includes('duration')) return `The programme runs for ${siteSettings.duration} across ${siteSettings.semesters} semesters.`;
+  if (lower.includes('programme') || lower.includes('program')) return `The current programme directory includes ${programs.map((program) => program.shortName).join(', ')}. Entrepreneurship & Innovation is now launching; the other three are coming soon.`;
+  if (lower.includes('internship')) return 'Multiple internships across startups, venture firms and innovation teams are part of the practical learning ecosystem.';
+  if (lower.includes('ppo') || lower.includes('pre-placement')) return 'IIEI has a PPO commitment designed around practical experience and industry exposure.';
+  if (lower.includes('funding')) return 'IIEI has an institutional funding commitment to support promising student ventures through its entrepreneurship ecosystem.';
   const match = faqs.find(
     (f) =>
       lower.includes(f.question.toLowerCase().slice(0, 10)) ||
@@ -34,7 +47,11 @@ function findAnswer(question: string): string {
   if (lower.includes('startup') || lower.includes('build'))
     return 'Absolutely! Entrepreneurship is central to the IIEI learning philosophy. Students can work through idea validation, prototyping, market testing, pitching and venture building as part of the ecosystem.';
 
-  return `Great question! I'd recommend talking to our admissions team for more details. You can reach them at admissions@iiei.in or through the Contact page. In the meantime, ${siteSettings.tagline}`;
+  const fallbacks = [
+    'I am not sure about that yet. I can help with IIEI programmes, admissions, fees, internships, founder-led learning, or the application process.',
+    'I do not have that detail yet. Try asking about the programme, fee, duration, hostel, internships, founders, or admissions.',
+  ];
+  return fallbacks[question.trim().length % fallbacks.length];
 }
 
 export default function VirtualAssistant() {
@@ -90,8 +107,8 @@ export default function VirtualAssistant() {
 
       {/* Chat window */}
       {open && (
-        <div className="fixed bottom-24 right-6 z-50 w-[calc(100vw-3rem)] sm:w-96 max-w-md animate-fade-in">
-          <div className="overflow-hidden border border-ink-200 bg-white shadow-2xl shadow-ink-900/15 flex flex-col" style={{ maxHeight: '70vh' }}>
+        <div className="fixed inset-x-3 bottom-3 z-50 animate-fade-in sm:inset-x-auto sm:bottom-24 sm:right-6 sm:w-[28rem]">
+          <div className="flex h-[min(680px,calc(100vh-6rem))] max-h-[calc(100vh-6rem)] flex-col overflow-hidden border border-ink-200 bg-white shadow-2xl shadow-ink-900/15">
             {/* Header */}
             <div className="bg-ink-950 p-4 flex items-center gap-3">
               <div className="flex h-9 w-9 items-center justify-center border border-cyan-400/30 text-cyan-300">
@@ -108,7 +125,7 @@ export default function VirtualAssistant() {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-ink-50">
+            <div className="min-h-0 flex-1 overflow-y-auto bg-ink-50 p-5 space-y-5">
               {messages.map((msg, i) => (
                 <div
                   key={i}
@@ -156,7 +173,7 @@ export default function VirtualAssistant() {
             </div>
 
             {/* Quick questions */}
-            {messages.length <= 2 && (
+            {messages.length === 1 && (
               <div className="px-4 pb-2 bg-ink-50">
                 <p className="text-xs text-ink-400 mb-2">Quick questions:</p>
                 <div className="flex flex-wrap gap-2">
