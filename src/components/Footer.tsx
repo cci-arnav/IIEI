@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-14 border-b border-white/10">
           {/* Brand Column & CCI Lockup */}
           <div className="lg:col-span-5">
-            <Logo variant="light" showCciTag={true} />
+            <Logo height="footer" variant="light" />
             <p className="mt-5 text-xs sm:text-sm text-ink-300 leading-relaxed max-w-sm">
               {siteSettings.instituteName} — an institutional business school established under the stewardship of {siteSettings.initiatedBy} ({siteSettings.initiatedByShort}).
             </p>

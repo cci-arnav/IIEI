@@ -105,7 +105,7 @@ export default function Navbar() {
 
   const linkColor = scrolled
     ? "text-ink-800 dark:text-ink-200 hover:text-ochre-600 dark:hover:text-ochre-400"
-    : "text-white/90 hover:text-white";
+    : "text-ink-900 dark:text-white/90 hover:text-ochre-600 dark:hover:text-white";
 
   // Shared mega menu panel — used by both lg and xl nav renders
   const MegaMenuPanel = () => (
@@ -242,14 +242,14 @@ export default function Navbar() {
         className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
           scrolled
             ? "bg-ivory-50/97 dark:bg-ink-950/97 backdrop-blur-md border-b border-ink-900/10 dark:border-white/10 shadow-sm"
-            : "bg-transparent border-b border-white/10 dark:border-white/5"
+            : "bg-transparent border-b border-ink-900/10 dark:border-white/10"
         }`}
       >
         <div className="mx-auto h-16 w-full max-w-[1560px] px-5 sm:px-8 lg:px-10 xl:px-14 2xl:px-16 flex items-center justify-between gap-3">
 
           {/* LOGO — never shrinks */}
           <div className="shrink-0">
-            <Logo variant={scrolled ? "dark" : "light"} />
+            <Logo height="navbar" variant={scrolled ? 'dark' : 'light'} />
           </div>
 
           {/* ── COMPACT DESKTOP NAV (lg: 1024–1279px) ────────────── */}
@@ -361,7 +361,7 @@ export default function Navbar() {
             <button
               type="button"
               className={`p-2 focus:outline-none transition-colors ${
-                scrolled ? "text-ink-900 dark:text-white" : "text-white"
+                scrolled ? "text-ink-900 dark:text-white" : "text-ink-900 dark:text-white"
               }`}
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle navigation"
