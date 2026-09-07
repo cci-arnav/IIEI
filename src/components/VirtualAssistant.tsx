@@ -136,21 +136,37 @@ export default function VirtualAssistant() {
 
   return (
     <>
-      {/* Floating Toggle Button */}
+      {/* Floating Toggle Button — circular, premium, brand-aligned */}
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className={`fixed bottom-6 right-6 z-50 flex h-13 w-13 items-center justify-center border border-white/20 bg-ink-900 text-white dark:bg-white dark:text-ink-950 shadow-2xl transition-all duration-300 hover:bg-ochre-600 dark:hover:bg-ochre-400 ${
-          open ? 'rotate-90' : ''
-        }`}
+        className={`fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50
+          flex items-center justify-center
+          w-14 h-14 sm:w-[56px] sm:h-[56px]
+          rounded-full
+          bg-ink-900 text-white
+          dark:bg-ochre-500 dark:text-ink-950
+          shadow-[0_4px_24px_rgba(15,22,38,0.35)] dark:shadow-[0_4px_24px_rgba(217,119,6,0.35)]
+          border border-white/15 dark:border-ochre-400/30
+          transition-all duration-300
+          hover:bg-ochre-600 hover:shadow-[0_6px_28px_rgba(180,83,9,0.40)]
+          dark:hover:bg-ochre-400 dark:hover:shadow-[0_6px_28px_rgba(245,158,11,0.45)]
+          hover:scale-105 active:scale-95
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ochre-500 focus-visible:ring-offset-2
+          ${open ? 'rotate-90' : 'rotate-0'}
+        `}
         aria-label="Toggle virtual admissions assistant"
       >
-        {open ? <X className="w-5 h-5" /> : <MessageCircle className="w-5 h-5" />}
+        {open ? (
+          <X className="w-5 h-5 shrink-0" />
+        ) : (
+          <MessageCircle className="w-5 h-5 shrink-0" />
+        )}
       </button>
 
       {/* Chat Window */}
       {open && (
-        <div className="fixed inset-x-3 bottom-3 z-50 sm:inset-x-auto sm:bottom-22 sm:right-6 sm:w-[420px] animate-fade-in">
+        <div className="fixed inset-x-3 bottom-3 z-50 sm:inset-x-auto sm:bottom-24 sm:right-6 sm:w-[420px] animate-fade-in">
           <div className="flex h-[min(640px,calc(100vh-6rem))] flex-col border border-ink-900/20 dark:border-white/20 bg-white dark:bg-ink-950 shadow-2xl">
             {/* Header */}
             <div className="bg-ink-900 dark:bg-ink-900 text-white p-4 flex items-center justify-between border-b border-ink-800">
@@ -226,18 +242,24 @@ export default function VirtualAssistant() {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Compact Quick Action Chips */}
-            <div className="px-3 py-2 border-t border-ink-900/10 dark:border-white/10 bg-white dark:bg-ink-950 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-              {quickQuestions.map((q, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => handleQuickQuestion(q)}
-                  className="whitespace-nowrap px-2.5 py-1 text-[11px] font-semibold border border-ink-200 dark:border-ink-800 text-ink-700 dark:text-ink-300 hover:border-ink-900 dark:hover:border-white hover:text-ink-900 dark:hover:text-white transition-colors"
-                >
-                  {q}
-                </button>
-              ))}
+            {/* Quick Action Chips — wrapping grid, no overflow-x */}
+            <div className="px-3 pt-2.5 pb-2 border-t border-ink-900/10 dark:border-white/10 bg-white dark:bg-ink-950">
+              <p className="text-[10px] font-bold uppercase tracking-wider text-ink-400 dark:text-ink-500 mb-1.5">
+                Quick questions
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {quickQuestions.map((q, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => handleQuickQuestion(q)}
+                    className="px-2.5 py-1 text-[11px] font-semibold leading-snug border border-ink-200 dark:border-ink-800 text-ink-700 dark:text-ink-300 hover:border-ink-900 dark:hover:border-white hover:text-ink-900 dark:hover:text-white transition-colors text-left"
+                    style={{ whiteSpace: 'normal', wordBreak: 'normal', overflowWrap: 'anywhere' }}
+                  >
+                    {q}
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* Input Bar */}

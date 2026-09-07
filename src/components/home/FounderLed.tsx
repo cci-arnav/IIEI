@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 
 export default function FounderLed() {
   return (
-    <section className="py-24 lg:py-32 bg-ivory-100 dark:bg-ink-900 border-b border-ink-900/10 dark:border-white/10 transition-colors">
+    <section className="py-14 lg:py-20 bg-ivory-100 dark:bg-ink-900 border-b border-ink-900/10 dark:border-white/10 transition-colors">
       <div className="section-padding">
         <Reveal>
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16 border-b border-ink-900/15 dark:border-white/15 pb-8">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-10 border-b border-ink-900/15 dark:border-white/15 pb-8">
             <div className="max-w-2xl">
               <span className="editorial-label">Teaching Ecosystem</span>
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-ink-900 dark:text-white tracking-tight mt-3">

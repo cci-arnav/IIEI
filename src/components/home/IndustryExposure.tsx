@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 
 export default function IndustryExposure() {
   return (
-    <section className="py-24 lg:py-32 bg-ink-950 text-white border-b border-white/10 overflow-hidden">
+    <section className="py-14 lg:py-20 bg-ink-950 text-white border-b border-white/10 overflow-hidden">
       <div className="section-padding">
         <Reveal>
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16 border-b border-white/15 pb-8">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-10 border-b border-white/15 pb-8">
             <div className="max-w-2xl">
               <span className="editorial-label text-ochre-400">Industry Exposure</span>
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mt-3">
@@ -29,7 +29,7 @@ export default function IndustryExposure() {
         </Reveal>
 
         {/* Sector Cards Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3 sm:gap-4 mb-14">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3 sm:gap-4 mb-9">
           {industryCards.map((card, i) => (
             <Reveal key={i} delay={i * 40}>
               <div className="border border-white/15 bg-white/5 p-4 text-center hover:bg-white/10 hover:border-white/30 transition-colors">

@@ -3,7 +3,7 @@ import Reveal from '@/components/Reveal';
 
 export default function BigIdea() {
   return (
-    <section className="py-24 lg:py-32 bg-ivory-50 dark:bg-ink-950 border-b border-ink-900/10 dark:border-white/10 transition-colors">
+    <section className="py-14 lg:py-20 bg-ivory-100 dark:bg-ink-950 border-b border-ink-900/10 dark:border-white/10 transition-colors">
       <div className="section-padding">
         <Reveal>
           <div className="max-w-4xl mx-auto text-center">

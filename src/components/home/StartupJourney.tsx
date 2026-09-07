@@ -3,10 +3,10 @@ import Reveal from '@/components/Reveal';
 
 export default function StartupJourney() {
   return (
-    <section className="py-24 lg:py-32 bg-white dark:bg-ink-950 border-b border-ink-900/10 dark:border-white/10 transition-colors">
+    <section className="py-14 lg:py-20 bg-white dark:bg-ink-950 border-b border-ink-900/10 dark:border-white/10 transition-colors">
       <div className="section-padding">
         <Reveal>
-          <div className="max-w-3xl mb-16 border-b border-ink-900/10 dark:border-white/10 pb-8">
+          <div className="max-w-3xl mb-10 border-b border-ink-900/10 dark:border-white/10 pb-8">
             <span className="editorial-label">Venture Progression</span>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-ink-900 dark:text-white tracking-tight mt-3">
               From Idea to Venture Scale

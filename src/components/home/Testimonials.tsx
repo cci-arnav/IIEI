@@ -4,10 +4,10 @@ import { Quote, Star } from 'lucide-react';
 
 export default function Testimonials() {
   return (
-    <section className="py-24 lg:py-32 bg-ink-950 grain overflow-hidden">
+    <section className="py-14 lg:py-20 bg-ink-950 grain overflow-hidden">
       <div className="section-padding">
         <Reveal>
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10">
             <p className="text-sm font-bold uppercase tracking-wider text-cyan-400 mb-4">
               Student Voices
             </p>

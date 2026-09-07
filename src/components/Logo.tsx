@@ -33,11 +33,11 @@ export default function Logo({ variant = 'dark', showCciTag = true }: LogoProps)
       </div>
 
       <div className={`hidden sm:flex flex-col border-l pl-3 py-0.5 text-left ${borderColor}`}>
-        <span className={`text-[10.5px] font-extrabold uppercase tracking-[0.16em] leading-tight transition-colors ${textColor}`}>
+        <span className={`text-[10px] xl:text-[10.5px] font-extrabold uppercase tracking-[0.14em] xl:tracking-[0.16em] leading-tight transition-colors ${textColor}`}>
           Entrepreneurship &amp; Innovation
         </span>
         {showCciTag && (
-          <span className={`text-[9px] font-semibold tracking-[0.08em] uppercase mt-0.5 ${subColor}`}>
+          <span className={`hidden xl:block text-[9px] font-semibold tracking-[0.08em] uppercase mt-0.5 ${subColor}`}>
             Initiated by CCI India
           </span>
         )}

@@ -7,7 +7,7 @@ import { siteSettings, programs } from '@/data/content';
 export default function Footer() {
   return (
     <footer className="bg-ink-950 text-ink-300 border-t border-white/10 transition-colors">
-      <div className="section-padding py-16 lg:py-20">
+      <div className="section-padding py-12 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-14 border-b border-white/10">
           {/* Brand Column & CCI Lockup */}
           <div className="lg:col-span-5">
@@ -19,9 +19,10 @@ export default function Footer() {
             {/* Supporting CCI India Asset Slot */}
             <div className="mt-6 inline-flex items-center gap-3 border border-white/15 px-3.5 py-2 bg-white/5">
               <img
-                src="/assets/branding/cci-logo.svg"
-                alt="CCI India"
-                className="h-6 w-auto object-contain text-white opacity-90"
+                src="/assets/branding/cci-logo.png"
+                alt="Chamber of Commerce & Industry of India (CCI India)"
+                className="h-7 w-auto object-contain"
+                style={{ filter: 'brightness(0) invert(1)' }}
               />
               <span className="text-[10px] font-bold uppercase tracking-wider text-ink-300 border-l border-white/20 pl-3">
                 Initiating Body

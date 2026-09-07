@@ -23,7 +23,7 @@ export default function Apply() {
         </div>
       </section>
 
-      <section className="bg-ivory-50 dark:bg-ink-950 py-24 border-b border-ink-900/10 dark:border-white/10 transition-colors">
+      <section className="bg-ivory-50 dark:bg-ink-950 py-14 border-b border-ink-900/10 dark:border-white/10 transition-colors">
         <div className="section-padding">
           <div className="max-w-4xl mx-auto border border-ink-900/15 dark:border-white/15 bg-white dark:bg-ink-900 p-8 sm:p-12 shadow-sm">
             <span className="editorial-label">Official Application</span>

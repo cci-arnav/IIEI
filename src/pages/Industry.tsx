@@ -49,7 +49,7 @@ export default function Industry() {
       </section>
 
       {/* 4 Pillars of Engagement */}
-      <section className="py-24 bg-ivory-100 dark:bg-ink-900 border-b border-ink-900/10 dark:border-white/10 transition-colors">
+      <section className="py-14 bg-ivory-100 dark:bg-ink-900 border-b border-ink-900/10 dark:border-white/10 transition-colors">
         <div className="section-padding">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[

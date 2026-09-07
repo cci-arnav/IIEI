@@ -14,7 +14,7 @@ export default function BigIdeaWords() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 lg:py-32 bg-ink-950 overflow-hidden grain">
+    <section ref={sectionRef} className="py-14 lg:py-20 bg-ink-950 overflow-hidden grain">
       <div className="section-padding">
         <div className="text-center mb-12">
           <p className="text-sm font-bold uppercase tracking-wider text-cyan-400 mb-4">

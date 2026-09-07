@@ -25,7 +25,7 @@ export default function About() {
       </section>
 
       {/* Mission / Vision / Governance */}
-      <section className="py-24 bg-white dark:bg-ink-950 border-b border-ink-900/10 dark:border-white/10 transition-colors">
+      <section className="py-14 bg-white dark:bg-ink-950 border-b border-ink-900/10 dark:border-white/10 transition-colors">
         <div className="section-padding">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -64,7 +64,7 @@ export default function About() {
       </section>
 
       {/* Difference Pillars */}
-      <section className="py-24 bg-ivory-100 dark:bg-ink-900 border-b border-ink-900/10 dark:border-white/10 transition-colors">
+      <section className="py-14 bg-ivory-100 dark:bg-ink-900 border-b border-ink-900/10 dark:border-white/10 transition-colors">
         <div className="section-padding">
           <Reveal>
             <div className="max-w-3xl mb-16 border-b border-ink-900/15 dark:border-white/15 pb-8">

@@ -4,7 +4,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 export default function FinalCTA() {
   return (
-    <section className="py-24 lg:py-32 bg-ink-950 text-white border-b border-white/10 overflow-hidden">
+    <section className="py-14 lg:py-20 bg-ink-950 text-white border-b border-white/10 overflow-hidden">
       <div className="section-padding">
         <Reveal>
           <div className="max-w-4xl mx-auto text-center">

@@ -23,7 +23,7 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="bg-ivory-50 dark:bg-ink-950 py-24 border-b border-ink-900/10 dark:border-white/10 transition-colors">
+      <section className="bg-ivory-50 dark:bg-ink-950 py-14 border-b border-ink-900/10 dark:border-white/10 transition-colors">
         <div className="section-padding">
           <div className="grid gap-12 lg:grid-cols-12 max-w-5xl mx-auto">
             {/* Left Contact Details */}

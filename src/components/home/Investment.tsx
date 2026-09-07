@@ -12,11 +12,11 @@ export default function Investment() {
   const calculatedTotal = activeStructure.breakdown.reduce((sum, item) => sum + item.amount, 0);
 
   return (
-    <section id="investment" className="py-24 lg:py-32 bg-ivory-50 dark:bg-ink-950 border-b border-ink-900/10 dark:border-white/10 transition-colors">
+    <section id="investment" className="py-14 lg:py-20 bg-[#F2EAD6] dark:bg-ink-950 border-b border-ink-900/10 dark:border-white/10 transition-colors">
       <div className="section-padding">
         {/* Section Header */}
         <Reveal>
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14 border-b border-ink-900/15 dark:border-white/15 pb-8">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-9 border-b border-ink-900/15 dark:border-white/15 pb-8">
             <div className="max-w-3xl">
               <span className="editorial-label">Fee Schedule &amp; Investment</span>
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-ink-900 dark:text-white tracking-tight mt-3">
@@ -63,7 +63,7 @@ export default function Investment() {
 
         {/* Total Highlight Header Card */}
         <Reveal delay={100}>
-          <div className="p-8 lg:p-10 bg-white dark:bg-ink-900 border border-ink-900/15 dark:border-white/15 mb-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
+          <div className="p-8 lg:p-10 bg-white dark:bg-ink-900 border border-ink-900/15 dark:border-white/15 mb-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
             <div>
               <span className="editorial-label text-ochre-600 dark:text-ochre-400">
                 {activeStructure.title} · {activeStructure.duration} Full Duration

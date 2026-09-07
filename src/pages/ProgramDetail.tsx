@@ -165,7 +165,7 @@ export default function ProgramDetail() {
       </section>
 
       {/* Curriculum Section */}
-      <section className="py-24 bg-ivory-100 dark:bg-ink-900 border-b border-ink-900/10 dark:border-white/10 transition-colors">
+      <section className="py-14 bg-ivory-100 dark:bg-ink-900 border-b border-ink-900/10 dark:border-white/10 transition-colors">
         <div className="section-padding">
           <Reveal>
             <div className="max-w-3xl mb-14">

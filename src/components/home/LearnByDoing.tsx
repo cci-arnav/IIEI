@@ -14,10 +14,10 @@ export default function LearnByDoing() {
   }, []);
 
   return (
-    <section id="learn-by-doing" className="py-24 lg:py-32 bg-ink-950 text-white border-b border-white/10 overflow-hidden">
+    <section id="learn-by-doing" className="py-14 lg:py-20 bg-ink-950 text-white border-b border-white/10 overflow-hidden">
       <div className="section-padding">
         <Reveal>
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10">
             <span className="editorial-label text-ochre-400">Core Methodology</span>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mt-3">
               The Execution Cycle

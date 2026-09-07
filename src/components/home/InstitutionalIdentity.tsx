@@ -5,7 +5,7 @@ import { ShieldCheck, Award, Building2, ArrowUpRight } from 'lucide-react';
 
 export default function InstitutionalIdentity() {
   return (
-    <section className="py-20 lg:py-28 bg-sand-100 dark:bg-ink-950 border-b border-ink-900/10 dark:border-white/10 transition-colors">
+    <section className="py-14 lg:py-20 bg-ivory-200 dark:bg-ink-950 border-b border-ink-900/10 dark:border-white/10 transition-colors">
       <div className="section-padding">
         <Reveal>
           <div className="max-w-4xl mx-auto border border-ink-900/15 dark:border-white/15 bg-white dark:bg-ink-900 p-8 sm:p-12 lg:p-16 shadow-md">
@@ -37,15 +37,23 @@ export default function InstitutionalIdentity() {
 
               {/* Real CCI India Logo Slot */}
               <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l border-ink-900/10 dark:border-white/10 pt-6 lg:pt-0 lg:pl-8 flex flex-col items-center justify-center text-center">
-                <div className="p-4 border border-ink-900/10 dark:border-white/10 bg-ivory-50 dark:bg-ink-950/60 w-full max-w-[200px] flex items-center justify-center">
+                <div className="p-5 border border-ink-900/10 dark:border-white/10 bg-ivory-50 dark:bg-ink-950/60 w-full max-w-[200px] flex items-center justify-center">
+                  {/* Light mode: natural colour PNG */}
                   <img
-                    src="/assets/branding/cci-logo.svg"
+                    src="/assets/branding/cci-logo.png"
                     alt="Chamber of Commerce & Industry of India (CCI India)"
-                    className="max-h-12 w-auto object-contain text-ink-900 dark:text-white"
+                    className="max-h-14 w-auto object-contain dark:hidden"
+                  />
+                  {/* Dark mode: inverted to white */}
+                  <img
+                    src="/assets/branding/cci-logo.png"
+                    alt="Chamber of Commerce & Industry of India (CCI India)"
+                    className="max-h-14 w-auto object-contain hidden dark:block"
+                    style={{ filter: 'brightness(0) invert(1)' }}
                   />
                 </div>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-ink-400 mt-3">
-                  National Apex Chamber
+                  Initiating Body · CCI India
                 </span>
               </div>
             </div>
