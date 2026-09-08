@@ -24,13 +24,17 @@ export default function FormLink({ type, children, className = '', icon = 'arrow
     );
   }
 
-  // In dev mode with placeholder URL, show warning but still make it clickable
+  // In dev mode with placeholder URL, still make it clickable but warn
   const isDevPlaceholder = import.meta.env.DEV && url.includes('DEV_MODE_NO_URL_SET');
   if (isDevPlaceholder) {
+    if (import.meta.env.DEV) {
+      console.warn(`FormLink: Using placeholder URL for ${type}. Set actual URL in .env`);
+    }
     return (
-      <span className={`${className} cursor-not-allowed opacity-70`} title="Form link pending configuration">
+      <a href={url} target="_blank" rel="noopener noreferrer" className={`${className} opacity-70`}>
         {children}
-      </span>
+        <Icon className="h-4 w-4" />
+      </a>
     );
   }
 

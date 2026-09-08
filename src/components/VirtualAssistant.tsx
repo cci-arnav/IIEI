@@ -137,11 +137,11 @@ export default function VirtualAssistant() {
   return (
     <>
       {/* Floating Toggle Button — circular, premium, brand-aligned */}
-      {/* Higher z-index to ensure it's above navbar but not interfering with navbar buttons */}
+      {/* Higher z-index than navbar (z-50) to ensure it's always clickable */}
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className={`fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50
+        className={`fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-[60]
           flex items-center justify-center
           w-14 h-14 sm:w-[56px] sm:h-[56px]
           rounded-full
@@ -167,7 +167,7 @@ export default function VirtualAssistant() {
 
       {/* Chat Window */}
       {open && (
-        <div className="fixed inset-x-3 bottom-3 z-50 sm:inset-x-auto sm:bottom-24 sm:right-6 sm:w-[420px] animate-fade-in">
+        <div className="fixed inset-x-3 bottom-3 z-[60] sm:inset-x-auto sm:bottom-24 sm:right-6 sm:w-[420px] animate-fade-in">
           <div className="flex h-[min(640px,calc(100vh-6rem))] flex-col border border-ink-900/20 dark:border-white/20 bg-white dark:bg-ink-950 shadow-2xl">
             {/* Header */}
             <div className="bg-ink-900 dark:bg-ink-900 text-white p-4 flex items-center justify-between border-b border-ink-800">
