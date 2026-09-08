@@ -137,6 +137,7 @@ export default function VirtualAssistant() {
   return (
     <>
       {/* Floating Toggle Button — circular, premium, brand-aligned */}
+      {/* Higher z-index to ensure it's above navbar but not interfering with navbar buttons */}
       <button
         type="button"
         onClick={() => setOpen(!open)}
@@ -171,8 +172,8 @@ export default function VirtualAssistant() {
             {/* Header */}
             <div className="bg-ink-900 dark:bg-ink-900 text-white p-4 flex items-center justify-between border-b border-ink-800">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-ochre-500/20 border border-ochre-400 text-ochre-300 flex items-center justify-center font-bold text-xs">
-                  IIEI
+                <div className="w-10 h-10 bg-transparent border border-ochre-400 text-ochre-300 flex items-center justify-center font-bold text-xs">
+                  <img src="/public/assets/iiei-logo.png" alt=""/>
                 </div>
                 <div>
                   <p className="font-display font-bold text-sm leading-tight">Admissions Assistant</p>
