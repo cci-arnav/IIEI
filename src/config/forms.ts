@@ -10,3 +10,4 @@ export function hasGoogleForm(type: 'apply' | 'enquiry') {
 export function getGoogleFormUrl(type: 'apply' | 'enquiry') {
   return type === 'apply' ? googleForms.applyUrl : googleForms.enquiryUrl;
 }
+

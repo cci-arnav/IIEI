@@ -14,6 +14,7 @@ export default function FormLink({ type, children, className = '', icon = 'arrow
   const Icon = icon === 'external' ? ExternalLink : ArrowRight;
 
   if (!available) {
+    
     if (import.meta.env.DEV) {
       console.warn(`FormLink: No URL configured for ${type}. Set VITE_GOOGLE_FORM_${type.toUpperCase()}_URL in .env`);
     }
